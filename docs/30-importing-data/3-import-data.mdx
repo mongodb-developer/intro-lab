@@ -1,0 +1,35 @@
+import Screenshot from "@site/src/components/Screenshot";
+
+# 👐 Importing the library data
+
+Now that you have your connection string, you can import the library data into your project.
+
+To do this, we've built a small utility that will copy the data from our database, into your cluster. This is why you'll need to provide this application with your connection string.
+
+:::caution
+You should never share your connection string with anyone. It contains your database credentials, and anyone with access to it can read and write data to your database.
+:::
+
+To import the data, start by going to the [importer application](https://mdb.link/import-library-data).
+
+You will be greeted by this minimalistic interface.
+
+<Screenshot src="img/screenshots/30-importing-data/3-import-data/1-importer-application.png" alt="Screenshot of the importer tool" />
+
+Paste your connection string into the input field, and click the **Import Library Data** button.
+
+You should see a message saying that the import has started.
+
+```
+Starting data import
+```
+
+:::note
+This will take approximately 5 minutes. Time to get a coffee!
+:::
+
+After a few minutes, you should see that the import job was successful.
+
+<Screenshot src="img/screenshots/30-importing-data/3-import-data/2-import-success.png" alt="Screenshot of a successful import" />
+
+
