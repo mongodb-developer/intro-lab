@@ -4,7 +4,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 export default function Screenshot(props) {
   return (
-    <BrowserWindow>
+    <BrowserWindow {...props}>
       <img src={useBaseUrl(props.src)} alt={props.alt} />
     </BrowserWindow>
   )

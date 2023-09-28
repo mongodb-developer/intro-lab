@@ -1,0 +1,80 @@
+import Screenshot from '@site/src/components/Screenshot';
+
+# 👐 Start the application
+
+Go to the [Github repository](https://github.com/mongodb-developer/library-management-system) for the demo application. From there, you have two options to start the application.
+
+## Option 1: Run in a Codespace
+
+By far, the easiest way to start the application is to run it in a Codespace. A Codespace is a cloud-hosted, containerized development environment that you can connect to from Visual Studio Code. It comes pre-configured with all the tools you need to build and run the application.
+
+In the case of this application, you can even use the online IDE to edit the code and see the changes reflected in the running application.
+
+To start the application in a Codespace, click on the *Code* button. Then, look for the *Codespaces* tab. Click on the *Create Codespace on main* button. This will create a new Codespace for you and start the application.
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/1-codespace.png" alt="Screenshot of the create codespace button" />
+
+Let it run for a few seconds as it prepares your environment. It will clone the repository, prepare the containers, and run the installation scripts. Once it's ready, you'll see an IDE, with a preview window that shows the running application.
+
+:::note
+Again, this might take a few minutes, it's a great time to grab a coffee ☕️
+:::
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/2-codespace.png" alt="Screenshot of the codespace" />
+
+### Expose the server port
+
+In order to get the application working in that environment, there is one small change you need to make to the codespace. You need to expose the port where the server is running.
+
+Look for the *Ports* tab in the bottom of the IDE.
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/3-ports.png" alt="Screenshot of the Ports tab" />
+
+Once you click on the tab, you'll see a list of ports. Right-click on the port `Server (5000)` row. Then select *Port Visibility* and then *Public*.
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/4-port-visibility.png" alt="Screenshot of the Port Visibility menu" />
+
+You'll see the text in the *Visibility* column change to `Public`.
+
+That's it, you're now ready to move to the next section.
+
+
+## Option 2: Run locally
+
+If you prefer to run the application locally, you can do so by following these steps. Keep in mind that the following steps of this workshop will be using the Codespace, so you might need to adapt some of the commands.
+
+First, clone the repository to your local machine.
+
+```bash
+git clone git@github.com:mongodb-developer/library-management-system.git
+```
+
+Then, change to the `library-management-system` directory.
+
+```bash
+cd library-management-system
+```
+
+Now go to each of the `client` and `server` directories and install the dependencies.
+
+```bash
+cd client
+npm install
+cd ../server
+npm install
+```
+
+Start the server application.
+
+```bash
+npm start
+```
+
+And, in another terminal window, start the client application.
+
+```bash
+cd client
+npm start
+```
+
+You now have the client running on http://localhost:4200, and the server running on http://localhost:5000.
