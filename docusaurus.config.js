@@ -130,14 +130,7 @@ const config = {
           hideable: true,
         },
       },
-      announcementBar: {
-        id: "feedback_form",
-        content:
-          'We are looking to revamp our docs, please fill <a target="_blank" rel="noopener noreferrer" href="#">this survey</a>',
-        backgroundColor: "#fafbfc",
-        textColor: "#091E42",
-        isCloseable: true,
-      },
+      announcementBar: undefined,
       navbar: {
         title: `${title}`,
         logo: {
