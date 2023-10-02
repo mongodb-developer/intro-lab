@@ -1,0 +1,28 @@
+# 👐 Optimize the query
+
+Now that you know of the patterns that we used in our data schema, you can rewrite the `getBook` method to retrieve the book information.
+
+Open the `server/src/controllers/books.ts` file, and look for the `getBook` method. How could you rewrite this query to be blazing fast, and meet the requirements that we defined for this application?
+
+:::tip
+How many calls do you need to do to your database now? Do you still need an aggregation pipeline? Look into the [documentation](https://www.mongodb.com/docs/manual/reference/method/db.collection.findOne/) for the `findOne` method.
+:::
+
+<details>
+  <summary>Click here to see the answer</summary>
+
+<div>
+
+```ts
+    public async getBook(bookId: string): Promise<Book> {
+        /**
+         * Optimized Code
+         */
+        const book = await collections?.books?.findOne({ _id: bookId });
+
+        return book;
+    }
+
+```
+</div>
+</details>

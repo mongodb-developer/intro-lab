@@ -1,0 +1,82 @@
+# 📘 Patterns used
+
+Let's look at the current code that is used to retrieve a single book. You can find this code in the `server/src/controllers/books.ts` file.
+
+```ts
+    public async getBook(bookId: string): Promise<Book> {
+        /**
+         * Initial Code
+         * Task: Optimise the query to take advantage of the already computed field.
+         * Hint: Take a look at the shape of the Book documents using MongoDB Compass.
+         */
+        const books = await collections?.books?.aggregate<Book>([
+            {
+                $match: {
+                    _id: bookId
+                },
+            },
+            {
+                $lookup: {
+                    from: 'issueDetails',
+                    localField: '_id',
+                    foreignField: 'book._id',
+                    pipeline: [
+                        {
+                            $match: {
+                                $or: [
+                                    { recordType: 'reservation' },
+                                    { recordType: 'borrowedBook', returned: false }
+                                ]
+                            }
+                        }
+                    ],
+                    as: 'details'
+                }
+            },
+            {
+                $set: {
+                    available: {
+                        $subtract: ['$totalInventory', { $size: '$details' }]
+                    }
+                }
+            },
+            {
+                $unset: 'details'
+            },
+        ]).toArray();
+
+        if (!books?.length) {
+            return;
+        }
+
+        return books[0];
+    }
+```
+
+That's a lot of code! That's because the developer who wrote this used MongoDB just like a relational database. Let's break it down into a few pieces.
+
+First, it's using an aggregation pipeline, don't worry too much about this, you'll learn more about them this afternoon.
+
+The first stage uses a `$match` stage to filter the documents by the `_id` field. This is the equivalent of a `WHERE` clause in SQL. This operation is really fast because the `_id` field is indexed automatically.
+
+The second stage uses a `$lookup` stage to join the `issueDetails` collection to the `books` collection. This is the equivalent of a `JOIN` in SQL. This operation is really slow because it has to scan the entire `issueDetails` collection to find the matching documents. It could be improved by adding an index on the `bookId` field of the `issueDetails` collection, but too many indexes can consume valuable resources.
+
+The third and fourth stages compute the number of available books by subtracting the number of issued books from the total inventory.
+
+At this point, we also have to do additional queries to display the first five reviews for a book, and the author information. This means that we have to do three queries to display a single book.
+
+Let's look at patterns that we can apply here to improve the performance of this query.
+
+## Available books - computed
+
+The first thing we can do is to compute the number of available books when we insert or update a book. This way, we don't have to compute it every time we retrieve a book.
+
+Now that we have this computed field, we don't need all the later stages of the aggregation pipeline, and we can directly query the book collection.
+
+## Reviews - subset
+
+For the reviews, we know that our users generally only look at the top five reviews. We can store the top five reviews in the book document, and only query the reviews collection when we need to display more reviews.
+
+## Author - extended reference
+
+For the author information, instead of storing only the author id, we can store the id, along with the author name. This way, we don't have to query the authors collection to display the author name.
