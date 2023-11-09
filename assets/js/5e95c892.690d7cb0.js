@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkswiftui_realm_app=self.webpackChunkswiftui_realm_app||[]).push([[661],{4942:(e,s,r)=>{r.r(s),r.d(s,{default:()=>l});r(7294);var a=r(6010),u=r(5463),p=r(3702),t=r(8790),c=r(1009),i=r(5893);function l(e){return(0,i.jsx)(u.FG,{className:(0,a.Z)(p.k.wrapper.docsPages),children:(0,i.jsx)(c.Z,{children:(0,t.H)(e.route.routes)})})}}}]);
