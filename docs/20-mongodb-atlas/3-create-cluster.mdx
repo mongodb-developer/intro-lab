@@ -1,10 +1,10 @@
 import Screenshot from "@site/src/components/Screenshot";
 
-# 👐 Create a cluster
+# 👐 Deploy a database cluster
 
 Now that you have a MongoDB Atlas account, you can create your first cluster. A cluster is a group of at least three servers that store your data. This ensures that your data is always available, even if one of the servers fails.
 
-You can create your first cluster for free. It won't expire, and you will have a 500 MB storage limit. This is enough to get started with MongoDB Atlas.
+You can create your first database cluster for free. It won't expire, and you will have a 500 MB storage limit. This is enough to get started with MongoDB Atlas.
 
 ## Create a new cluster
 
@@ -16,27 +16,35 @@ From the overview page, click on the green button that says **"+ Create"**.
 If you just created your account, you will already be redirected to the cluster creation page and can skip this step.
 :::
 
-## Deploy your database
-
 You will be redirected to the cluster creation page. Here you can choose the cloud provider and region where your data will be stored. You can also choose the type of cluster you want to create. For this tutorial, we will use the free tier.
+
+1. For the cluster tier, pick **M0**, which is the free tier. In the **Name** input box, put a meaningful name for your cluster.
+1. Uncheck the *Automate security setup* box. You will set up security manually in the next steps.
+1. Uncheck the *Add sample dataset* box. You will import a dataset later in this tutorial.
+1. Select your favorite cloud provider, and the region closest to you.
+1. Finally, click on the green button that says **"Create Deployment"**.
 
 <Screenshot url="https://cloud.mongodb.com" src="img/screenshots/20-mongodb-atlas/3-create-cluster/2-deploy-database.png" alt="Create cluster screenshot" />
 
-For the cluster tier, pick **M0**, which is the free tier. Select your favorite cloud provider, and the region closest to you. In the **Name** input box, put a meaningful name for your cluster.
+Once you're done with the hardest part of the process (the captcha), you will be redirected to the security quickstart.
 
-Then click on the green button that says **"Create"**.
+## Security quickstart
 
-Once you're done with the hardest part of the process (the captcha), you will be redirected to the security quickstart screen.
+By default, your MongoDB Atlas deployment is completely locked-down. You need to configure the network settings and create a user to access your database.
 
-## Add a user
+While your deployment is being provisioned, you will see the security quickstart dialog.
 
-MongoDB is very secure, and doesn't have any user by default. You will need to create one to be able to connect to your database.
+### Network access
 
-While your cluster is being provisioned, you will see the security quickstart screen. Start by adding a user.
+First, you should **Allow Access from Anywhere**. You will see a field prepolulated with the IP address `0.0.0.0/0`. This means that you can connect to your database from any IP address including the virtual environment you will use for this lab. Click **Add IP Address** to add this IP address to the network allowlist.
 
-<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/20-mongodb-atlas/3-create-cluster/3-username.png" alt="Create a user screenshot" />
+:::caution
+It is dangerous to expose your database to the entire world. Never do this is a real production environment.
+:::
 
-Pick any username and password you want. This will be used when you want to connect to your database.
+### Database user
+
+Next, you need to create a database user. Pick any username and password you want. This will be used when you want to connect to your database. Click **Create Database User** to create the user.
 
 :::tip
 Make sure to remember your username and password. You will need them later.
@@ -44,29 +52,8 @@ Make sure to remember your username and password. You will need them later.
 For the sake of this workshop, it might be preferable to use a simple password that you'll remember over a more secure one.
 :::
 
-## Whitelist your IP address
-
-Now that you have a user, you need to whitelist your IP address. This will allow you to connect to your database from your computer.
-
-In the case of this workshop, we'll want to enable access from any computer. This will let our virtual environment connect to the database without knowing its IP address.
-
-<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/20-mongodb-atlas/3-create-cluster/4-allow-ip.png" alt="Screenshot of the ip whitelisting screen" />
-
-:::caution
-It is dangerous to expose your database to the entire world. You should never do this is a real production environment.
-:::
-
-To enable access from everywhere, enter the value
-
-```
-0.0.0.0/0
-```
-
-in the **IP Address** input box. You can add a description if you want to. Then click on the **Add Entry** button.
-
 ## That's all!
 
-That's all! You have a new cluster, and you can now connect to it from your application. If everything goes well, you should see your newly created cluster in the database deployment screen.
+That's all! You have a new database cluster, and you can now connect to it from your application. If everything goes well, you should see your newly created cluster in the database deployment screen.
 
-<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/20-mongodb-atlas/3-create-cluster/5-database-deployment.png" alt="Screenshot of the database deployment screen" />
-
+<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/20-mongodb-atlas/3-create-cluster/3-database-deployment.png" alt="Screenshot of the database deployment screen" />
