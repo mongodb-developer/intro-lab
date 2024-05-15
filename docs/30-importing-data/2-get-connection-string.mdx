@@ -2,13 +2,13 @@ import Screenshot from "@site/src/components/Screenshot";
 
 # 👐 Get your connection string
 
-To load the dataset into your cluster, you will first need your connection string to MongoDB.
+In order to load the dataset into your cluster, you will need to get the connection string for your cluster.
 
-To get your connection string, go back to the Atlas UI, and look for the **Connect** button.
+In the Atlas UI, navigate to the **Overview** page. In the **Clusters section**, click **Connect**. 
 
 <Screenshot url="https://cloud.mongodb.com" src="img/screenshots/30-importing-data/2-get-connection-string/1-connect-button.png" alt="Screenshot of the connect button" />
 
-This will provide you with a modal that offers a number of different ways to connect to your database.
+A modal will display several ways to connect to your database.
 
 <Screenshot url="https://cloud.mongodb.com" src="img/screenshots/30-importing-data/2-get-connection-string/2-connect-modal.png" alt="Screenshot of the connect modal" />
 
@@ -22,7 +22,7 @@ Look for your connection string. It should look something like
 mongodb+srv://<username>:<password>@<cluster-url>/
 ```
 
-Click on the copy button next to it to copy it to your clipboard, and store it somewhere safe. You will need this connection string in a number of places throughout this training.
+Click the copy button next to your connection string to copy it to your clipboard. Paste the connection string somewhere safe. You will need this connection string several times throughout this training.
 
 :::tip
 Don't forget to replace `<password>` with the password you set when you created the cluster.
