@@ -2,7 +2,7 @@ import Screenshot from "@site/src/components/Screenshot";
 
 # 👐 Deploy a database cluster
 
-Now that you have a MongoDB Atlas account, you can create your first cluster. A cluster is a group of at least three servers that store your data. This ensures that your data is always available, even if one of the servers fails.
+Now that you have a MongoDB Atlas account, you can create your first cluster. A cluster is a group of at least three servers that store your data. Using a cluster ensures that your data is always available, even if one of the servers fails.
 
 You can create your first database cluster for free. It won't expire, and you will have a 500 MB storage limit. This is enough to get started with MongoDB Atlas.
 
@@ -13,15 +13,15 @@ From the overview page, click on the green button that says **"+ Create"**.
 <Screenshot url="https://cloud.mongodb.com" src="img/screenshots/20-mongodb-atlas/3-create-cluster/1-overview.png" alt="Overview screenshot" />
 
 :::note
-If you just created your account, you will already be redirected to the cluster creation page and can skip this step.
+If you just created your account, you will automatically be redirected to the cluster creation page and can skip this step.
 :::
 
 You will be redirected to the cluster creation page. Here you can choose the cloud provider and region where your data will be stored. You can also choose the type of cluster you want to create. For this tutorial, we will use the free tier.
 
 1. For the cluster tier, pick **M0**, which is the free tier. In the **Name** input box, put a meaningful name for your cluster.
 1. Uncheck the *Automate security setup* box. You will set up security manually in the next steps.
-1. Uncheck the *Add sample dataset* box. You will import a dataset later in this tutorial.
-1. Select your favorite cloud provider, and the region closest to you.
+1. Uncheck the *Preload sample dataset* box. You will import a dataset later in this tutorial.
+1. Select your favorite cloud provider and the region closest to you.
 1. Finally, click on the green button that says **"Create Deployment"**.
 
 <Screenshot url="https://cloud.mongodb.com" src="img/screenshots/20-mongodb-atlas/3-create-cluster/2-deploy-database.png" alt="Create cluster screenshot" />
