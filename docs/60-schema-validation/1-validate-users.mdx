@@ -1,0 +1,115 @@
+# Enable validation for the users collection
+
+In this exercise, you will explore the pre-written JSON validation schema for the `users` collection, run a script to apply it to the collection, and test the schema validation by inserting a document that does not match the schema.
+
+## Explore the JSON Schema
+
+The JSON schema for the `users` collection is stored in the `server/src/schema-validation
+/apply-schema.ts` [file](https://github.com/mongodb-developer/library-management-system/blob/main/server/src/schema-validation/apply-schema.ts). Open the file in your GitHub Codespace and examine the schema.
+
+```ts
+const userSchema = {
+    bsonType: 'object',
+    required: ['name', 'isAdmin'],
+    properties: {
+        name: {
+            bsonType: 'string',
+            minLength: 5,
+            description: 'must be a string and is required'
+        },
+        isAdmin: {
+            bsonType: 'bool',
+            description: 'must be a boolean and is required'
+        }
+    }
+};
+```
+
+The schema defines the following constraints:
+- The required fields are `name` and `isAdmin`.
+- The `name` field must be a string with a minimum length of 5 characters.
+- The `isAdmin` field must be a boolean.
+
+## Explore the script to apply the schema
+
+Examine the lines immediately following the schema definition in the `apply-schema.ts` file. You will see a function that applies the schema to the `users` collection.
+
+```ts
+console.log('Applying schema validation for users...');
+const resultUsers = await db.command({
+    collMod: 'users',
+    validator: {
+        $jsonSchema: userSchema
+    },
+    validationLevel: 'strict',
+    validationAction: 'error'
+});
+```
+
+The function uses the `db.command()` method to apply the schema to the `users` collection.
+- The `collMod` option specifies the collection to which the schema should be applied.
+- The `validator` option specifies the JSON schema to use for validation. This is the `userSchema` object declared just above.
+- The `validationLevel` option specifies the level of validation to perform. This could be `strict` or `moderate`.
+    - If you set it to `strict`, the document will be inserted and updated only if it passes validation.
+    - If you set it to `moderate` updates to existing documents in the collection that don't match the validation rules aren't checked for validity.
+- And finally, the `validationAction` option specifies the action to take when a document fails validation. This could be `error` or `warn`.
+    - If you set it to `error`, MongoDB rejects any insert or update that violates the validation criteria.
+    - If you set it to `warn`, the operation proceeds, but the violation is recorded in the MongoDB log.
+
+## Apply the schema to the `users` collection
+
+You need to run the script to apply the schema to the `users` collection.
+
+1. Open a new terminal emulator tab in your GitHub Codespace. 
+    1. Locate the bottom panel and click on the `TERMINAL` tab.
+    1. Locate the `+` icon on the top right of the terminal panel and click on it to open a new terminal tab.
+    1. Click on the new terminal tab to activate it.
+
+1. Run the following command to apply the schema to the `users` collection:
+
+    ```sh
+    cd server
+    node dist/schema-validation/apply-schema.js 
+
+    ```
+
+    You might be prompted to allow pasting into the terminal. Click `Allow` to paste the command.
+
+    Click enter to run the command. After a few of seconds, you should see the following output:
+
+    ```sh
+    Connecting to MongoDB Atlas...
+    Connected!
+
+    Applying schema validation for users...
+    Schema validation enabled!
+    ```
+
+## Test the schema validation
+
+Now that the schema validation is enabled for the `users` collection, you can test it by inserting a document that does not match the schema.
+
+1. Open the [Atlas UI](https://cloud.mongodb.com/utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=developer.day&utm_term=project.phoenix)
+1. Click on `Browse Collections` under your cluster.
+1. Navigate to the `users` collection — that's the last collection on the list.
+1. Click on the `Insert Document` button on the right and then, click `Insert`.
+
+You should see an error message. At the very bottom of the error message, you should see the following:
+
+```sh
+"schemaRulesNotSatisfied": [{
+    "operatorName": "required",
+    "specifiedAs": {"required": ["name","isAdmin"]},
+    "missingProperties": ["isAdmin","name"]
+}]
+```
+
+The error describes that the `name` and `isAdmin` fields are required but missing in the document you tried to insert.
+
+Insert a document again with the `name` and `isAdmin` fields and you should see the document inserted successfully.
+
+## Summary
+
+In this exercise, you explored the JSON schema for the `users` collection, ran a script to apply the schema to the collection, and tested the schema validation by inserting a document that does not match the schema.
+
+In the next exercise, you will enable schema validation for the `authors` collection.

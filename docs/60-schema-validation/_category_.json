@@ -1,0 +1,8 @@
+{
+    "label": "Schema Validation",
+    "position": 70,
+    "link": {
+        "type": "generated-index",
+        "description": "In this section, you apply a JSON schema to collections in the library database to enable schema validation."
+    }
+}
