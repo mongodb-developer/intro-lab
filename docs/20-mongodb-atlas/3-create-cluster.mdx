@@ -46,11 +46,19 @@ It is dangerous to expose your database to the entire world. Never do this is a 
 
 Next, you need to create a database user. Pick any username and password you want. This will be used when you want to connect to your database. Click **Create Database User** to create the user.
 
+Atlas might create the user automatically for you if you have just created your account. In this case, the username and password will match your Atlas account credentials.
+
 :::tip
 Make sure to remember your username and password. You will need them later.
 
 For the sake of this workshop, it might be preferable to use a simple password that you'll remember over a more secure one.
+
+Don't use any special characters in your password. Even though MongoDB allows some special characters, they might not work well with the tools you'll use later in this workshop.
 :::
+
+### Manual network access configuration
+
+If you don't see a button to **Allow Access from Anywhere**, you should close the dialog and go to the **Network Access** tab under the **Security** section in the left sidebar. Click on the **Add IP Address** button, add the IP address `0.0.0.0/0` and click **Confirm**.
 
 ## That's all!
 
