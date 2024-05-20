@@ -41,8 +41,8 @@ const featureList = [
 
 // UTM stuff
 
-const utmAdvocateName = `project.phoenix`;
-const utmWorkshopName = 'intro-lab'
+const utmAdvocateName = 'project.phoenix';
+const utmWorkshopName = 'developer.day';
 
 const utmParams = `utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=${utmWorkshopName}&utm_term=${utmAdvocateName}`;
 
