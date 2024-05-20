@@ -1,0 +1,26 @@
+# 📘 What is Schema Validation, and Why?
+
+## Introduction to Schema Validation with MongoDB
+
+Schema Validation is a feature in MongoDB that allows you to enforce specific rules regarding the structure of documents in a collection. This means you can ensure that all documents stored in your MongoDB collection adhere to a predefined schema, which is particularly useful for maintaining data consistency and integrity.
+
+### What is Schema Validation?
+
+Schema Validation in MongoDB involves defining validation rules using JSON Schema, a powerful tool for validating the structure and contents of JSON documents. These rules can specify requirements such as:
+
+- **Field types:** Ensuring that certain fields are of a specific data type (e.g., strings, integers, arrays).
+- **Required fields:** Ensuring that certain fields must be present in all documents.
+- **Value ranges:** Ensuring that numeric fields fall within specific ranges.
+- **String patterns:** Ensuring that string fields match certain regular expressions.
+
+### Why Use Schema Validation?
+
+1. **Data Integrity:** By enforcing a schema, you can prevent invalid data from being inserted into your collection, thus maintaining the integrity of your dataset.
+2. **Consistency:** Schema validation ensures that all documents follow a consistent structure, making it easier to query and manage your data.
+3. **Error Prevention:** Catching schema violations at the database level helps in identifying errors early in the data entry process, reducing the chances of data-related issues later.
+4. **Simplified Application Logic:** With schema validation handled by the database, application developers can focus more on business logic rather than data validation.
+5. **Enhanced Collaboration:** For teams working on a shared database, schema validation helps ensure that all team members follow the same data structure conventions, reducing misunderstandings and errors.
+
+## Summary
+
+In this section, you will explore the JSON schema for the `users`, and `authors` collections, run a script to apply the schema to the collections, and test the schema validation by inserting a document that does not match the schema.
