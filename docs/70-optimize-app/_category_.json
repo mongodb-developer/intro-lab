@@ -1,0 +1,8 @@
+{
+    "label": "Optimize the Application",
+    "position": 70,
+    "link": {
+        "type": "generated-index",
+        "description": "In this section, you will use the concepts you learned in the data modeling session to optimize the app."
+    }
+}
