@@ -107,24 +107,17 @@ If you see an error related to your user permissions, go back to the [Database U
 
 Now that the schema validation is enabled for the `users` collection, you can test it by inserting a document that does not match the schema.
 
-1. Open the [Atlas UI](https://cloud.mongodb.com?utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=developer.day&utm_term=project.phoenix).
-1. Click on **Browse Collections** under your cluster.
-1. Navigate to the `users` collection — that's the last collection on the list.
-1. Click on the **Insert Document** button on the right and then, click **Insert**.
+1. Open the file `server/src/schema-validation/test-validation.ts` [file](https://github.com/mongodb-developer/library-management-system/blob/main/server/src/schema-validation/test-validation.ts).
+2. Explore the `insertOne()` function that will try to insert a new user and the error handling code.
+3. Execute the script by running the following command.
 
-You should see an error message. At the very bottom of the error message, you should see the following:
-
-```sh
-"schemaRulesNotSatisfied": [{
-    "operatorName": "required",
-    "specifiedAs": {"required": ["name","isAdmin"]},
-    "missingProperties": ["isAdmin","name"]
-}]
-```
+  ```node
+  node dist/schema-validation/test-validation.js
+  ```
 
 The error describes that the `name` and `isAdmin` fields are required but missing in the document you tried to insert.
 
-Insert a document again with the `name` and `isAdmin` fields and you should see the document inserted successfully.
+Modify the script to insert a document again with the `name` and `isAdmin` fields and you should see the document inserted successfully.
 
 ## Summary
 
