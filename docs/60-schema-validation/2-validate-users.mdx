@@ -83,7 +83,7 @@ You need to run the script to apply the schema to the `users` collection.
 
     ```sh
     cd server
-    node dist/schema-validation/apply-schema.js 
+    npx tsx src/schema-validation/apply-schema.ts
 
     ```
 
@@ -112,7 +112,7 @@ Now that the schema validation is enabled for the `users` collection, you can te
 3. Execute the script by running the following command.
 
   ```node
-  node dist/schema-validation/test-validation.js
+  npx tsx src/schema-validation/test-validation.ts
   ```
 
 The error describes that the `name` and `isAdmin` fields are required but missing in the document you tried to insert.
