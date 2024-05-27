@@ -1,0 +1,74 @@
+# 👐 Build a compound index following the ESR rule
+
+In this exercise, you will build a compound index following the ESR rule, compare the query explain plans before and after creating the index, and analyze them.
+
+## Explore the code
+
+1. Open the file `server/src/indexing/borrowed-books-index.ts` [file](https://github.com/mongodb-developer/library-management-system/blob/main/server/src/indexing/borrowed-books-index.ts) in your GitHub Codespace.
+
+2. Examine the code to build a compound index on the `borrowedBooks` collection.
+
+    ```ts
+    /**
+    * Create the index to support the following query:
+    * issueDetails.find({
+    *    'user._id': userID,
+    *   borrowDate: { $gte: date },
+    * }, {
+    *  sort: { returnedDate: -1 }
+    * })
+    */
+    await collections?.issueDetails?.createIndex({
+        // Equality
+        'user._id': 1,
+        // Sort
+        returnedDate: 1,
+        // Range
+        borrowDate: 1,
+    });
+    ```
+
+    :::info
+    The index is created on the `borrowedBooks` collection to support the query that finds the issue details for a user with a specific `userID`, where the `borrowDate` is greater than or equal to a specific `date`, and sorts the results by `returnedDate` in descending order.
+
+    This is compound index and it follows the ESR rule: Equality, Sort, and Range. This ensures optimal performance for the query.
+    :::
+
+3. Execute the script to create the compound index.
+
+    ```bash
+    npx tsx src/indexing/borrowed-books-index.ts
+    ```
+
+    After a few seconds, you should see the following output:
+
+    ```bash
+    Connecting to MongoDB Atlas...
+    Connected!
+
+    BEFORE creating the index
+
+    Winning plan stage: COLLSCAN
+    No index used
+    Total documents examined: 1284
+    Number of documents returned: 3
+
+    -----------------------------
+
+    AFTER creating the index
+
+    Winning plan stage: IXSCAN
+    Index used: user._id_1_returnedDate_1_borrowDate_1
+    Total documents examined: 3
+    Number of documents returned: 3
+    ```
+
+    :::info
+    The script uses [explain plans](https://docs.mongodb.com/manual/reference/method/cursor.explain/) to compare the query plans before and after creating the index.
+
+    Notice the difference in the winning plan stage and the number of documents examined before and after creating the index.
+    :::
+
+## 🦸‍♀️ Try different indexes
+
+Modify the compound index by adding and removing fields, and observe the changes in the query explain plans.
