@@ -1,0 +1,8 @@
+{
+    "label": "Troubleshooting the application",
+    "position": 80,
+    "link": {
+        "type": "generated-index",
+        "description": "In this section, you will find commmon solutions to commonly occuring challenges while launching the application."
+    }
+}

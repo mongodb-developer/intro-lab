@@ -1,0 +1,104 @@
+# ℹ️ Connection Issues
+
+It is not uncommon for the application to fail to launch or be viewed in GitHub Codespaces. Here are some common solutions to problems encountered while launching the Library Management Application in codespaces.
+
+### **Troubleshooting Guide: Atlas URI Connection Issues**
+
+#### **Problem:**
+
+Users are unable to connect the Library Management Application to the Atlas cluster due to a missing or misconfigured Atlas URI connection string.
+
+#### **Common Causes:**
+
+1. The connection string is not correctly copied from the Atlas cluster.
+2. The connection string is missing from the application configuration.
+3. Incorrect formatting or missing credentials in the connection string.
+4. Complex passwords (those passwords containing special characters). Avoid these - for this lab, please keep passwords simple. Alternatively, if you must have a special character in your password, please make sure you URL Encode the password. You can use [this tool to accomplish this](https://www.url-encode-decode.com/).
+
+#### **Solutions:**
+
+### **1\. Verify the Atlas Connection String**
+
+**Step-by-Step Guide:**
+
+1. **Access Your Atlas Cluster:**
+    
+    - Log in to your MongoDB Atlas account.
+    - Navigate to the **Clusters** view.
+    - Click on the **Connect** button for your desired cluster.
+2. **Copy the Connection String:**
+    
+    - In the **Connect to Cluster** dialog, select the **"Connect your application"** option.
+    - Ensure the connection string is for **"Standard connection string (SRV)"** format.
+    - Copy the provided connection string. It should look something like this:
+    
+        
+        `mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority` 
+        
+
+### **2\. Configure the Connection String in Your Application**
+
+**Step-by-Step Guide:**
+
+1. **Locate Configuration File:**
+    
+    - Open the `.env` file for your Library Management Application.
+2. **Update the `.env` File:**
+    
+    - Paste the connection string into the `.env` file, replacing the placeholder values (`<username>`, `<password>`, `<dbname>`) with your actual MongoDB Atlas credentials and database name.
+    - Example of a correctly formatted `.env` file:
+              
+        `PORT=5000
+        DATABASE_URI=mongodb+srv://yourUsername:yourPassword@cluster0.mongodb.net
+        DATABASE_NAME=library
+        SECRET=yourSecret` 
+        
+3. **Save and Restart:**
+    
+    - Save the `.env` file.
+    - Restart your application to apply the changes.
+
+### **3\. Check for Common Errors in Connection String**
+
+**Step-by-Step Guide:**
+
+1. **Validate Credentials:**
+    
+    - Ensure the username and password in the connection string are correct.
+    - Verify that the user has the necessary permissions to access the database.
+2. **Format Verification:**
+    
+    - Ensure the connection string follows the correct format:
+         
+        `mongodb+srv://username:password@cluster.mongodb.net` 
+        
+    - Common mistakes include:
+        - Missing `mongodb+srv://` at the beginning.
+        - Incorrect placement of colons `:` and at-sign `@`.
+        - Spaces or typos within the string.
+3. **Network Access:**
+    
+    - Ensure your IP address is whitelisted in the Atlas Network Access settings.
+    - Navigate to **Network Access** in the Atlas UI and add your current IP address if it’s not already listed.
+
+### **4\. Test the Connection**
+
+**Step-by-Step Guide:**
+
+1. **Run a Connection Test:**
+    
+    - Use a MongoDB client (e.g., MongoDB Compass, `mongo` shell) to test the connection string.
+    - If the connection is successful, it confirms that the string is correctly formatted.
+2. **Review Error Messages:**
+    
+    - Check the logs of your Library Management Application for any error messages.
+    - Common errors might indicate issues like "Authentication failed," "Network timeout," or "Unknown host."
+
+### **Resources and Further Assistance**
+
+- **MongoDB Atlas Documentation:** [Connect to Your Cluster](https://docs.atlas.mongodb.com/connect-to-cluster/)
+- **Library Management Application Loader Script:** [Loader Script](https://library-scripts-ofiejy7uia-uc.a.run.app/)
+
+## Summary
+
+In this section, you explored commonly occuring connection issues and their resolutions. Don't hesitate to ask the instructor for assistance if these solutions do not resolve the problem.
