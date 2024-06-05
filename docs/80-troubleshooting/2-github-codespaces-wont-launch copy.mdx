@@ -1,0 +1,116 @@
+# ℹ️ GitHub Codespaces Issues
+
+#### **Problem:**
+
+Users are experiencing issues with GitHub Codespaces, such as ports (5000, 4200) not being made public.
+
+#### **Common Issues and Solutions:**
+
+### **1\. Ports Not Made Public**
+
+**Step-by-Step Guide:**
+
+1. **Check Port Visibility Settings:**
+    
+    - Open your Codespace.
+    - Click on the **Ports** tab in the lower panel.
+    - Locate the ports you need to make public (e.g., 5000, 4200).
+2. **Make Ports Public:**
+    
+    - Click on the lock icon next to the port number to change it from private to public.
+    - Ensure the status changes to **public**.
+3. **Verify Application Configuration:**
+    
+    - Ensure your application is configured to listen on the correct ports.
+    - Check your application’s settings to make sure it’s set to bind to all network interfaces. For example, in a Node.js application:
+        
+        javascript
+        
+        Copy code
+        
+        ``const PORT = process.env.PORT || 5000;
+        app.listen(PORT, '0.0.0.0', () => {
+          console.log(`Server running on port ${PORT}`);
+        });`` 
+        
+
+### **2\. Authentication Issues**
+
+**Step-by-Step Guide:**
+
+1. **Check GitHub Authentication:**
+    
+    - Ensure you are logged into GitHub from your Codespace.
+    - Run `gh auth status` to verify authentication status.
+    - If not authenticated, run `gh auth login` and follow the prompts to log in.
+2. **Access Permissions:**
+    
+    - Verify that you have the necessary permissions to access the repository.
+    - Check if you are part of the correct team or organization that owns the repository.
+
+### **3\. Environment Setup Problems**
+
+**Step-by-Step Guide:**
+
+1. **Check Devcontainer Configuration:**
+    
+    - Ensure your `.devcontainer/devcontainer.json` file is correctly configured.
+    - Example configuration:
+        
+        json
+        
+        Copy code
+        
+        `{
+          "name": "My Codespace",
+          "image": "mcr.microsoft.com/vscode/devcontainers/base:0-focal",
+          "features": {
+            "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+          },
+          "forwardPorts": [5000, 4200]
+        }` 
+        
+2. **Rebuild Codespace:**
+    
+    - Sometimes rebuilding the Codespace can resolve setup issues.
+    - Open the Command Palette (`Ctrl+Shift+P`), search for `Codespaces: Rebuild Container`, and select it.
+
+### **4\. Slow or Unresponsive Codespace**
+
+**Step-by-Step Guide:**
+
+1. **Monitor Resource Usage:**
+    
+    - Check the resource usage of your Codespace.
+    - Open the terminal and use commands like `top` or `htop` to monitor CPU and memory usage.
+2. **Adjust Machine Type:**
+    
+    - If your Codespace is consistently slow, consider upgrading to a more powerful machine type.
+    - You can do this from the Codespace configuration settings on GitHub.
+
+### **5\. Errors During Application Startup**
+
+**Step-by-Step Guide:**
+
+1. **Review Logs:**
+    
+    - Check the application logs for errors.
+    - Open the terminal in your Codespace and review the output of your application’s startup command.
+2. **Common Errors and Fixes:**
+    
+    - **Port Already in Use:**
+        - Ensure no other processes are using the required ports.
+        - Use `lsof -i :5000` or `lsof -i :4200` to check for processes using these ports and kill them if necessary.
+    - **Missing Environment Variables:**
+        - Ensure all necessary environment variables are set.
+        - Add them to your `.env` file or set them directly in the Codespace settings.
+
+### **Additional Resources and Support**
+
+- **GitHub Codespaces Documentation:** [GitHub Codespaces](https://docs.github.com/en/codespaces)
+- **GitHub CLI Authentication:** [gh auth login](https://cli.github.com/manual/gh_auth_login)
+- **Common Environment Setup:** Devcontainer Features
+
+## Summary
+
+In this section, you explored commonly occuring github codespaces issues and their resolutions. Don't hesitate to ask the instructor for assistance if these solutions do not resolve the problem.

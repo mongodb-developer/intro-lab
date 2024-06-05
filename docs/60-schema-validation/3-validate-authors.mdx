@@ -9,7 +9,7 @@ This is an advanced exercises that requires you to write code. If you get stuck 
 1. Execute the script again to apply the schema to the `authors` collection.
     ```bash
     cd server
-    node dist/schema-validation/apply-schema.js 
+    npx tsx src/schema-validation/apply-schema.ts
 
     ```
-1. Finally, test the schema validation by inserting a document that does not match the schema.
+1. Finally, test the schema validation by modifying the `server/src/schema-validation/test-validation.ts` script. Inserting a document in the `authors` collection.
