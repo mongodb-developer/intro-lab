@@ -1,4 +1,4 @@
-# 📘 Patterns used
+# 📘 Patterns Used
 
 Let's look at the current code that is used to retrieve a single book. You can find this code in the `server/src/controllers/books.ts` file.
 
@@ -55,7 +55,7 @@ Let's look at the current code that is used to retrieve a single book. You can f
 
 That's a lot of code! That's because the developer who wrote this used MongoDB just like a relational database. Let's break it down into a few pieces.
 
-First, it's using an aggregation pipeline, don't worry too much about this, you'll learn more about them this afternoon.
+First, it uses an aggregation pipeline. Don't worry too much about this — you'll learn more about it this afternoon.
 
 The first stage uses a `$match` stage to filter the documents by the `_id` field. This is the equivalent of a `WHERE` clause in SQL. This operation is really fast because the `_id` field is indexed automatically.
 
@@ -63,7 +63,7 @@ The second stage uses a `$lookup` stage to join the `issueDetails` collection to
 
 The third and fourth stages compute the number of available books by subtracting the number of issued books from the total inventory.
 
-At this point, we also have to do additional queries to display the first five reviews for a book, and the author information. This means that we have to do three queries to display a single book.
+At this point, we also have to do additional queries to display the first five reviews for a book and the author information. This means that we have to do three queries to display a single book.
 
 Let's look at patterns that we can apply here to improve the performance of this query.
 
@@ -75,7 +75,7 @@ Now that we have this computed field, we don't need all the later stages of the 
 
 ## Reviews - subset
 
-For the reviews, we know that our users generally only look at the top five reviews. We can store the top five reviews in the book document, and only query the reviews collection when we need to display more reviews.
+For the reviews, we know that our users generally only look at the top five reviews. We can store the top five reviews in the book document and only query the reviews collection when we need to display more reviews.
 
 ## Author - extended reference
 
