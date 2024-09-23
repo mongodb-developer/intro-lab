@@ -1,0 +1,8 @@
+{
+    "label": "MongoDB Atlas",
+    "position": 20,
+    "link": {
+        "type": "generated-index",
+        "description": "了解如何创建 MongoDB Atlas 账户并部署一个免费集群。"
+    }
+}

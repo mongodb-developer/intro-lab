@@ -1,0 +1,91 @@
+import Screenshot from '@site/src/components/Screenshot';
+
+# 👐 启动应用程序
+
+前往 [GitHub 仓库](https://github.com/mongodb-developer/library-management-system)查看演示应用程序。从这里，你有两种选择来启动应用程序。
+
+## 选项 1：在 Codespace 中运行
+
+:::info
+
+🚀 __快速开始： [点击这里](https://github.com/codespaces/new/mongodb-developer/library-management-system?quickstart=1) 开始新的 Codespace 或恢复上次的 Codespace！__
+
+:::
+
+最简单的启动应用程序的方法就是在 Codespace 中运行。Codespace 是一个云托管的、容器化的开发环境，你可以从 Visual Studio Code 连接到它。它预配置了你需要的所有工具来构建和运行应用程序。
+
+对于这个应用程序，你甚至可以使用在线 IDE 编辑代码，并看到运行的应用程序中反映的更改。
+
+要在 Codespace 中启动应用程序，点击 *Code* 按钮。然后，寻找 *Codespaces* 标签。点击 *Create Codespace on main* 按钮。这将为你创建一个新的 Codespace 并启动应用程序。
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/1-codespace.png" alt="创建 codespace 按钮的截图" />
+
+让它运行几秒钟，因为它正在准备你的环境。它将克隆仓库，准备容器，并运行安装脚本。一旦准备好，你会看到一个 IDE，其中有一个预览窗口显示正在运行的应用程序。
+
+:::note
+再次提醒，这可能需要几分钟。现在是喝杯咖啡的好时机 ☕️
+:::
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/2-codespace.png" alt="codespace 的截图" />
+
+### 暴露服务器端口
+
+为了让应用程序在该环境中正常工作，你需要对 codespace 进行一个小改动。你需要暴露服务器运行的端口。
+
+在 IDE 底部寻找 *Ports* 标签。
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/3-ports.png" alt="Ports 标签的截图" />
+
+点击该标签后，你会看到一个端口列表。右键点击 `Server (5000)` 行。然后选择 *Port Visibility*，然后选择 *Public*。
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/4-port-visibility.png" alt="Port Visibility 菜单的截图" />
+
+你会看到 *Visibility* 列中的文本变为 `Public`。
+
+就是这样，你现在可以进入下一部分了。
+
+## 🦸 选项 2：本地运行
+
+如果你更喜欢在本地运行应用程序，可以按照以下步骤进行。请记住，在本实验的后续步骤中我们将使用 GitHub Codespaces，因此你可能需要调整一些命令。
+
+:::info
+
+在实验过程中我们将使用 GitHub Codespaces，这些说明仅在你无法使用 Codespaces 或者你 _真的非常非常_ 想要本地安装的情况下使用。
+
+:::
+
+首先，将仓库克隆到你的本地机器。
+
+```bash
+git clone git@github.com:mongodb-developer/library-management-system.git
+```
+
+然后，切换到 library-management-system 目录。
+
+```bash
+cd library-management-system
+```
+
+现在进入 client 和 server 目录并安装依赖项。
+
+```bash
+cd client
+npm install
+cd ../server
+npm install
+```
+
+启动服务器应用程序。
+
+```bash
+npm start
+```
+
+然后，在另一个终端窗口，启动客户端应用程序。
+
+```bash
+cd client
+npm start
+```
+
+你现在有客户端运行在 `http://localhost:4200` ，服务器运行在 `http://localhost:5000`。

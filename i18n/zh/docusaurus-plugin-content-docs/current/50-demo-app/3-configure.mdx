@@ -1,0 +1,38 @@
+import Screenshot from "@site/src/components/Screenshot";
+
+# 👐 配置应用程序
+
+现在你的环境已经设置好了，你可以配置应用程序了。
+
+IDE 中应该已经打开了一个文件。如果没有，请在左侧的文件资源管理器中查找并打开文件 `server/.env`。这个文件包含了应用程序的配置。
+
+文件应如下所示：
+
+```
+PORT=5000
+DATABASE_URI="mongodb+srv://user:password@serverurl"
+DATABASE_NAME="library"
+SECRET="secret"
+```
+
+你需要将 `DATABASE_URI` 参数更改为你的连接字符串。这与导入数据时使用的连接字符串相同。
+
+:::tip
+不记得如何获取你的连接字符串？查看 [导入图书馆数据](/docs/importing-data/import-data) 部分。
+:::
+
+复制并粘贴你的连接字符串到 `DATABASE_URI` 参数中。文件将自动保存，服务器将重新启动。
+
+在底部的 *Terminal* 标签中，寻找 `Server is running on port: 5000` 行。如果你看到了，就一切正常了！
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/3-configure/1-running.png" alt="终端面板的截图" />
+
+## 重新加载客户端
+
+现在服务器正在运行，你可以重新加载客户端以查看应用程序。
+
+在右上角的面板中，点击刷新图标以重新加载客户端。
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/3-configure/2-reload.png" alt="刷新图标的截图" />
+
+点击此图标将重新加载客户端。现在你应该已经连接到数据库，应该会看到网页中列出了一些书籍。

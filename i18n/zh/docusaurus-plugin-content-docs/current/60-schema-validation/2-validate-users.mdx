@@ -1,0 +1,131 @@
+# 👐 为 users 集合启用验证
+
+在本练习中，您将探索 pre-written 的 `users` 集合的 JSON 模型校验，运行脚本将其应用于集合，并通过插入不符合模型定义的文档来测试模型校验。
+
+## 数据库用户权限
+
+要更新任何数据库集合的验证器，您的数据库用户必须具有管理员权限。请按照以下步骤确保您的用户具有正确的权限：
+
+1. 打开 [Atlas UI](https://cloud.mongodb.com?utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=developer.day&utm_term=project.phoenix)。
+2. 在左侧菜单中，导航到 **Network Settings** 并选择 **Database Access**。
+3. 在列表中找到您的数据库用户。检查 **MongoDB Roles** 列中用户的角色。如果角色不是 **atlasAdmin@admin**，您需要更新它。
+4. 如果角色不是 **atlasAdmin@admin**，请点击用户旁边的 **Edit** 按钮。
+5. 向下滚动到 **Database User Privileges** 部分并展开 **Built-in Role** 下拉菜单。
+6. 从下拉菜单中选择 **Atlas admin**。
+7. 点击 **Update User** 保存更改。
+
+Atlas 会在几秒钟内部署更改。
+
+## 探索 JSON 模式
+
+`users` 集合的 JSON 模式存储在 `server/src/schema-validation/apply-schema.ts` [文件](https://github.com/mongodb-developer/library-management-system/blob/main/server/src/schema-validation/apply-schema.ts)中。在您的 GitHub Codespace 中打开该文件并检查模式。
+
+```ts
+const userSchema = {
+    bsonType: 'object',
+    required: ['name', 'isAdmin'],
+    properties: {
+        name: {
+            bsonType: 'string',
+            minLength: 5,
+            description: 'must be a string and is required'
+        },
+        isAdmin: {
+            bsonType: 'bool',
+            description: 'must be a boolean and is required'
+        }
+    }
+};
+```
+
+该模式定义了以下约束：
+- 必填字段是 `name` 和 `isAdmin`。
+- `name` 字段必须是长度至少为 5 个字符的字符串。
+- `isAdmin` 字段必须是布尔值。
+
+## 探索应用模式的脚本
+
+检查 `apply-schema.ts` 文件中模式定义之后的代码行。您将看到一个将模式应用于 `users` 集合的函数。
+
+```ts
+console.log('Applying schema validation for users...');
+const resultUsers = await db.command({
+    collMod: 'users',
+    validator: {
+        $jsonSchema: userSchema
+    },
+    validationLevel: 'strict',
+    validationAction: 'error'
+});
+```
+
+该函数使用 `db.command()` 方法将模式应用于 `users` 集合。
+- `collMod` 选项指定要应用模式的集合。
+- `validator` 选项指定用于验证的 JSON 模式。这是上面声明的 `userSchema` 对象。
+- `validationLevel` 选项指定要执行的验证级别。这可以是 `strict` 或 `moderate`。
+    - 如果设置为 `strict`，文档只有在通过验证时才会被插入和更新。
+    - 如果设置为 `moderate`，集合中现有文档的更新将不检查其是否符合验证规则。
+- 最后，`validationAction` 选项指定在文档验证失败时采取的操作。这可以是 `error` 或 `warn`。
+    - 如果设置为 `error`，MongoDB 会拒绝任何违反验证标准的插入或更新。
+    - 如果设置为 `warn`，操作会继续进行，但违规行为会记录在 MongoDB 日志中。
+
+## 将模型应用于 `users` 集合
+
+您需要运行脚本将模型应用于 `users` 集合。
+
+1. 在您的 GitHub Codespace 中打开一个新的终端仿真器标签。
+    1. 定位底部面板并点击 `TERMINAL` 标签。
+    1. 定位终端面板右上角的 `+` 图标，点击它打开一个新的终端标签。
+    1. 点击新的终端标签激活它。
+
+1. 运行以下命令将模式应用于 `users` 集合：
+
+    ```sh
+    cd server
+    node dist/schema-validation/apply-schema.js 
+    ```
+
+    您可能会被提示允许粘贴到终端。点击 **Allow** 以粘贴命令。
+
+    按回车键运行命令。几秒钟后，您应该会看到以下输出：
+
+    ```sh
+    Connecting to MongoDB Atlas...
+    Connected!
+
+    Applying schema validation for users...
+    Schema validation enabled!
+    ```
+
+:::caution
+如果您看到与用户权限相关的错误，请返回到[数据库用户权限](#database-user-permissions)部分并更新您的用户权限。
+:::
+
+## 测试模型验证
+
+现在已经为 `users` 集合启用了模型校验，您可以通过插入不符合模型的文档来测试它。
+
+1. 打开 [Atlas UI](https://cloud.mongodb.com?utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=developer.day&utm_term=project.phoenix)。
+1. 在您的集群下点击 **Browse Collections**。
+1. 导航到 `users` 集合 —— 它是列表中的最后一个集合。
+1. 点击右侧的 **Insert Document** 按钮，然后点击 **Insert**。
+
+您应该会看到一条错误消息。在错误消息的最底部，您应该会看到以下内容：
+
+```sh
+"schemaRulesNotSatisfied": [{
+    "operatorName": "required",
+    "specifiedAs": {"required": ["name","isAdmin"]},
+    "missingProperties": ["isAdmin","name"]
+}]
+```
+
+错误描述了 `name` 和 `isAdmin` 字段是必需的，但在您尝试插入的文档中缺失了这些字段。
+
+再次插入包含 `name` 和 `isAdmin` 字段的文档，您应该会看到文档成功插入。
+
+## 总结
+
+在这个练习中，您探索了 `users` 集合的 JSON 模型，运行了一个脚本将模型应用到集合，并通过插入不符合模型的文档测试了模型验证。
+
+在下一个练习中，您将为 `authors` 集合启用模型验证。

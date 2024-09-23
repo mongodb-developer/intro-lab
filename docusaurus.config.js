@@ -99,12 +99,12 @@ const config = {
   staticDirectories: ["static"],
   i18n: {
     defaultLocale: "en",
-    locales: ["en"],
+    locales: ["en", "zh"],
   },
   customFields: {
     startButtonTitle: `${startButtonTitle}`,
     featureList: featureList,
-    utmParams
+    utmParams,
   },
   presets: [
     [
@@ -147,7 +147,15 @@ const config = {
           height: "100%",
         },
         items: [
-          
+          {
+            label: "🤖 AI Lab Assistant",
+            href: "https://mdb.link/lab-assistant",
+            position: "right",
+          },
+          {
+            type: "localeDropdown",
+            position: "right",
+          },
         ],
       },
       footer: {

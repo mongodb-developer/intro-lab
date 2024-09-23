@@ -1,0 +1,26 @@
+# 👐 优化查询
+
+既然你已经了解了我们在数据模式中使用的模式，现在你可以重写 `getBook` 方法来检索书籍信息。
+
+打开 `server/src/controllers/books.ts` 文件，查找 `getBook` 方法。你如何重写这个查询，使其速度飞快，并满足我们为这个应用程序定义的要求？
+
+:::tip
+你现在需要对数据库进行多少次调用？你仍然需要一个聚合管道吗？查看 [文档](https://www.mongodb.com/docs/manual/reference/method/db.collection.findOne/) 了解 `findOne` 方法。
+:::
+
+<details>
+  <summary>点击这里查看答案</summary>
+<div>
+
+```ts
+    public async getBook(bookId: string): Promise<Book> {
+        /**
+         * 优化后的代码
+         */
+        const book = await collections?.books?.findOne({ _id: bookId });
+
+        return book;
+    }
+```
+</div>
+</details>
