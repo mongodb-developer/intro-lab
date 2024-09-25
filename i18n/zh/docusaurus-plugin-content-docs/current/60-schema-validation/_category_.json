@@ -1,0 +1,8 @@
+{
+    "label": "模型校验",
+    "position": 70,
+    "link": {
+        "type": "generated-index",
+        "description": "在本节中，您将对图书馆数据库中的集合应用模型校验（schema validation）模式。"
+    }
+}

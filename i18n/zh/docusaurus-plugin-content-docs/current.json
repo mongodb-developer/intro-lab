@@ -1,0 +1,62 @@
+{
+  "version.label": {
+    "message": "当前版本",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.MongoDB Atlas": {
+    "message": "MongoDB Atlas",
+    "description": "The label for category MongoDB Atlas in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.MongoDB Atlas.link.generated-index.description": {
+    "message": "了解如何创建 MongoDB Atlas 账户并部署一个免费集群。",
+    "description": "The generated-index page description for category MongoDB Atlas in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Importing Data": {
+    "message": "导入数据",
+    "description": "The label for category Importing Data in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Importing Data.link.generated-index.description": {
+    "message": "本节向您展示如何导入后续实验所需的数据。",
+    "description": "The generated-index page description for category Importing Data in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Open the Application": {
+    "message": "打开示例应用程序",
+    "description": "The label for category Open the Application in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Open the Application.link.generated-index.description": {
+    "message": "本节中，您将运行我们提供的示例程序——图书馆管理系统。",
+    "description": "The generated-index page description for category Open the Application in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Schema Validation": {
+    "message": "模型校验",
+    "description": "The label for category Schema Validation in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Schema Validation.link.generated-index.description": {
+    "message": "在本节中，您将对图书馆数据库中的集合应用模型校验（schema validation）模式。",
+    "description": "The generated-index page description for category Schema Validation in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Indexing": {
+    "message": "Indexing",
+    "description": "The label for category Indexing in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Indexing.link.generated-index.description": {
+    "message": "In this section, you apply a JSON schema to collections in the library database to enable schema validation.",
+    "description": "The generated-index page description for category Indexing in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Optimize the Application": {
+    "message": "优化应用程序",
+    "description": "The label for category Optimize the Application in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Optimize the Application.link.generated-index.description": {
+    "message": "在本节中，您将使用在数据建模课程中学习的概念来优化应用程序。",
+    "description": "The generated-index page description for category Optimize the Application in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Troubleshooting the application": {
+    "message": "Troubleshooting the application",
+    "description": "The label for category Troubleshooting the application in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Troubleshooting the application.link.generated-index.description": {
+    "message": "In this section, you will find commmon solutions to commonly occuring challenges while launching the application.",
+    "description": "The generated-index page description for category Troubleshooting the application in sidebar tutorialSidebar"
+  }
+}

@@ -1,0 +1,67 @@
+import Screenshot from "@site/src/components/Screenshot";
+
+# 👐 部署一个数据库集群
+
+现在您已经有了 MongoDB Atlas 账户，可以创建您的第一个集群。集群是由至少三个服务器组成的群组，用于存储您的数据。使用集群可以确保您的数据始终可用，即使其中一台服务器出现故障。
+
+您可以免费创建您的第一个数据库集群。它不会过期，并且您将有 500 MB 的存储限制。这足够开始使用 MongoDB Atlas。
+
+## 创建一个新集群
+
+在概览页面，点击绿色按钮 **“+ Create”**。
+
+<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/20-mongodb-atlas/3-create-cluster/1-overview.png" alt="概览截图" />
+
+:::note
+如果您刚创建了您的账户，您将自动被重定向到集群创建页面，可以跳过此步骤。
+:::
+
+您将被重定向到集群创建页面。在这里您可以选择将数据存储在哪个云服务商和地区。您还可以选择要创建的集群类型。对于本教程，我们将使用免费实例规格。
+
+1. 对于集群层，选择 **M0**，这是免费实例规格。在 **Name** 输入框中，输入名称 'DeveloperDay'（一个词，不含空格）。
+1. 取消选中 *Automate security setup* 复选框。您将在下一步骤手动设置安全性。
+1. 取消选中 *Preload sample dataset* 复选框。您将在本教程后面导入数据集。
+1. 选择您喜欢的云服务商和离您最近的地区。
+1. 最后，点击绿色按钮 **“Create Deployment”**。
+
+<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/20-mongodb-atlas/3-create-cluster/2-deploy-database.png" alt="创建集群截图" />
+
+一旦您完成了流程中最困难的部分（验证码），您将被重定向到安全快速入门。
+
+## 安全快速入门
+
+默认情况下，您的 MongoDB Atlas 部署是完全锁定的。您需要配置网络设置并创建一个用户来访问您的数据库。
+
+在您的部署正在配置时，您将看到安全快速入门对话框。
+
+### 网络访问
+
+首先，您应该 **允许从任何地方访问**。您将看到一个预填的 IP 地址 `0.0.0.0/0`。这意味着您可以从任何 IP 地址连接到您的数据库，包括您将用于此实验的虚拟环境。点击 **Add IP Address** 将此 IP 地址添加到网络允许列表。
+
+:::caution
+将您的数据库暴露给整个世界是很危险的。在真实生产环境中绝不要这样做。
+:::
+
+### 数据库用户
+
+接下来，您需要创建一个数据库用户。选择您想要的任何用户名和密码。这将在您想要连接到数据库时使用。点击 **Create Database User** 创建用户。
+
+如果您刚创建了您的账户，Atlas 可能会自动为您创建用户。在这种情况下，用户名和密码将与您的 Atlas 账户凭据相匹配。
+
+:::tip
+请确保记住您的用户名和密码。您以后会需要它们。
+
+为了本次工作坊的顺利进行，使用一个您能记住的简单密码可能比更复杂的安全密码更好。
+
+不要在密码中使用任何特殊字符。尽管 MongoDB 允许一些特殊字符，但它们可能与您将在本次工作坊中使用的工具不兼容。
+:::
+
+### 手动网络访问配置
+
+如果您没有看到 **Allow Access from Anywhere** 按钮，您应该关闭对话框并转到左侧栏 **Security** 部分下的 **Network Access** 标签。点击 **Add IP Address** 按钮，添加 IP 地址 `0.0.0.0/0` 并点击 **Confirm**。
+
+## 就这些！
+
+就这些！您有了一个新的数据库集群，现在可以从您的应用程序连接到它。如果一切顺利，您应该在数据库部署屏幕上看到新创建的集群。
+
+<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/20-mongodb-atlas/3-create-cluster/3-database-deployment.png" alt="数据库部署屏幕截图" />

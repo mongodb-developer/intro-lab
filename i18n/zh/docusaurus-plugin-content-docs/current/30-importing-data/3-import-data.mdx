@@ -1,0 +1,35 @@
+import Screenshot from "@site/src/components/Screenshot";
+
+# 👐 导入图书馆数据
+
+现在您已经有了连接字符串，可以将图书馆数据导入到您的项目中。
+
+为此，我们构建了一个导入应用程序，它会将数据从我们的数据库复制到您的集群中。您需要向导入应用程序提供您的连接字符串。
+
+:::caution
+您不应该与任何人分享您的连接字符串。它包含您的数据库凭据，任何拥有它的人都可以读取和写入您的数据库数据。
+:::
+
+要导入数据，请先访问 [导入应用程序](https://mdb.link/import-library-data)。
+
+您会看到这个简洁的界面。
+
+<Screenshot url="https://mdb.link/import-library-data" src="img/screenshots/30-importing-data/3-import-data/1-importer-application.png" alt="导入工具的截图" />
+
+将您的连接字符串粘贴到输入框中，然后点击 **Import Library Data(导入图书馆数据)** 按钮。
+
+您应该会看到一条消息，表明导入已开始。
+
+```
+Starting data import
+```
+
+:::note
+导入数据可能需要几分钟。这是一个伸展身体或喝杯咖啡的好时机！☕
+:::
+
+几分钟后，您应该会看到导入作业成功完成的消息。
+
+<Screenshot url="https://mdb.link/import-library-data" src="img/screenshots/30-importing-data/3-import-data/2-import-success.png" alt="成功导入的截图" />
+
+一旦数据复制到您的集群中，您就可以开始构建您的应用程序了。

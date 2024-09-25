@@ -1,0 +1,27 @@
+import Screenshot from "@site/src/components/Screenshot";
+
+# 👐 获取您的连接字符串
+
+为了将数据集加载到您的集群中，您需要获取集群的连接字符串。
+
+在 Atlas UI 中，导航到 **Overview** 页面。在 **Clusters section**，点击 **Connect**。
+
+<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/30-importing-data/2-get-connection-string/1-connect-button.png" alt="连接按钮的截图" />
+
+一个 UI 窗口将显示几种连接到数据库的方式。
+
+<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/30-importing-data/2-get-connection-string/2-connect-modal.png" alt="连接模态窗口的截图" />
+
+选择 **Compass**。虽然我们不会使用 Compass 来导入数据，但这是查看连接字符串的一种简便方法。
+
+<Screenshot url="https://cloud.mongodb.com" src="img/screenshots/30-importing-data/2-get-connection-string/3-connect-compass.png" alt="连接字符串的截图" />
+
+查找您的连接字符串。它应类似于
+```
+mongodb+srv://<username>:<password>@<cluster-url>/
+```
+点击连接字符串旁边的复制按钮将其复制到您的剪贴板。将连接字符串粘贴到一个安全的地方。在整个培训过程中，您将多次需要此连接字符串。
+
+:::tip
+别忘了将 `<password>` 替换为您创建集群时设置的密码。
+:::

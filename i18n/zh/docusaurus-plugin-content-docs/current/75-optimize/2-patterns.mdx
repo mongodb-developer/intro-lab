@@ -1,0 +1,82 @@
+# 📘 使用的模式
+
+让我们看看当前用于检索单本书籍的代码。您可以在 `server/src/controllers/books.ts` 文件中找到这段代码。
+
+```ts
+    public async getBook(bookId: string): Promise<Book> {
+        /**
+         * 初始代码
+         * 任务：优化查询以利用已计算的字段。
+         * 提示：使用 MongoDB Compass 查看 Book 文档的结构。
+         */
+        const books = await collections?.books?.aggregate<Book>([
+            {
+                $match: {
+                    _id: bookId
+                },
+            },
+            {
+                $lookup: {
+                    from: 'issueDetails',
+                    localField: '_id',
+                    foreignField: 'book._id',
+                    pipeline: [
+                        {
+                            $match: {
+                                $or: [
+                                    { recordType: 'reservation' },
+                                    { recordType: 'borrowedBook', returned: false }
+                                ]
+                            }
+                        }
+                    ],
+                    as: 'details'
+                }
+            },
+            {
+                $set: {
+                    available: {
+                        $subtract: ['$totalInventory', { $size: '$details' }]
+                    }
+                }
+            },
+            {
+                $unset: 'details'
+            },
+        ]).toArray();
+
+        if (!books?.length) {
+            return;
+        }
+
+        return books[0];
+    }
+```
+
+代码很多！这是因为编写这段代码的开发者将 MongoDB 用作关系数据库。让我们将其分解为几个部分。
+
+首先，它使用了一个聚合管道，不要太担心，您将在今天下午学习更多关于它的内容。
+
+第一阶段使用 `$match` 阶段通过 `_id` 字段过滤文档。这相当于 SQL 中的 `WHERE` 子句。这一操作非常快，因为 `_id` 字段是自动索引的。
+
+第二阶段使用 `$lookup` 阶段将 `issueDetails` 集合连接到 `books` 集合。这相当于 SQL 中的 `JOIN`。这一操作非常慢，因为它必须扫描整个 `issueDetails` 集合以找到匹配的文档。可以通过在 `issueDetails` 集合的 `bookId` 字段上添加索引来改进，但过多的索引会消耗宝贵的资源。
+
+第三和第四阶段通过从总库存中减去已发出的书籍数量来计算可用的书籍数量。
+
+此时，我们还需要进行额外的查询以显示一本书的前五个评论和作者信息。这意味着我们必须进行三次查询才能显示一本书。
+
+让我们看看可以应用哪些模式来提高这个查询的性能。
+
+## 可用书籍 - 计算字段
+
+我们可以做的第一件事是在插入或更新书籍时计算可用书籍的数量。这样，我们每次检索书籍时就不必重新计算。
+
+既然我们有了这个计算字段，我们就不需要聚合管道的所有后续阶段，可以直接查询书籍集合。
+
+## 评论 - 子集
+
+对于评论，我们知道用户通常只查看前五个评论。我们可以将前五个评论存储在书籍文档中，只有在需要显示更多评论时才查询评论集合。
+
+## 作者 - 扩展引用
+
+对于作者信息，我们可以存储作者 ID 以及作者姓名，而不是仅存储作者 ID。这样，我们不必查询作者集合即可显示作者姓名。

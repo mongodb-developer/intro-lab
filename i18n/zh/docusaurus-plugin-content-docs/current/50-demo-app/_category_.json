@@ -1,0 +1,8 @@
+{
+    "label": "打开示例应用程序",
+    "position": 50,
+    "link": {
+        "type": "generated-index",
+        "description": "本节中，您将运行我们提供的示例程序——图书馆管理系统。"
+    }
+}
