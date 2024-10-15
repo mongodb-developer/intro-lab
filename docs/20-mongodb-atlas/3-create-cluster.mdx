@@ -36,7 +36,11 @@ While your deployment is being provisioned, you will see the security quickstart
 
 ### Network access
 
-First, you should **Allow Access from Anywhere**. You will see a field prepopulated with the IP address `0.0.0.0/0`. This means that you can connect to your database from any IP address, including the virtual environment you will use for this lab. Click "Add IP Address" to add this IP address to the network allowlist.
+First, you need to **Allow Access from Anywhere**. You will see a field prepopulated with the IP address `0.0.0.0/0`. This means that you can connect to your database from any IP address, including the virtual environment you will use for this lab. Click **Add IP Address** to add it to the network allowlist.
+
+:::note
+If you don't see a button to allow access from anywhere, you should close the dialog and go to the **Network Access** tab under the **Security** section in the left sidebar. Click on **Add IP Address**, add `0.0.0.0/0`, and click **Confirm**.
+:::
 
 :::caution
 It is dangerous to expose your database to the entire world. Never do this in a real production environment.
@@ -53,12 +57,8 @@ Make sure to remember your username and password. You will need them later.
 
 For the sake of this workshop, it might be preferable to use a simple password that you'll remember over a more secure one.
 
-Don't use any special characters in your password. Even though MongoDB allows some special characters, they might not work well with the tools you'll use later in this workshop.
+<strong>Don't use any special characters in your password</strong>. Even though MongoDB allows some special characters, they might not work well with the tools you'll use later in this workshop.
 :::
-
-### Manual network access configuration
-
-If you don't see a button to allow access from anywhere, you should close the dialog and go to the **Network Access** tab under the **Security** section in the left sidebar. Click on "Add IP Address," add the IP address `0.0.0.0/0`, and click "Confirm."
 
 ## That's all!
 
