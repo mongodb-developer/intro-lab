@@ -107,7 +107,7 @@ If you see an error related to your user permissions, go back to the [Database U
 Now that the schema validation is enabled for the `users` collection, you can test it by inserting a document that does not match the schema.
 
 1. Open the file `server/src/schema-validation/test-validation.ts` [file](https://github.com/mongodb-developer/library-management-system/blob/main/server/src/schema-validation/test-validation.ts).
-2. Explore the `insertOne()` function that will try to insert a new user and the error handling code.
+2. Explore the call to the `insertOne()` function around line 12 that will try to insert a new user and the error handling code around line 18.
 3. Execute the script by running the following command.
 
   ```sh
