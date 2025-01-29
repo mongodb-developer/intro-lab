@@ -125,14 +125,7 @@ const config = {
       }),
     ],
   ],
-  plugins: [
-    [
-      require.resolve("docusaurus-lunr-search"),
-      {
-        languages: ["en", "zh"], // language codes
-      },
-    ],
-  ],
+  plugins: [require.resolve("docusaurus-lunr-search")],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -174,7 +167,17 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ["powershell", "swift", "kotlin"],
       },
+      mermaid: {
+        theme: { light: "neutral", dark: "forest" },
+      },
     }),
+  future: {
+    experimental_faster: true,
+  },
+  markdown: {
+    mermaid: true,
+  },
+  themes: ["@docusaurus/theme-mermaid"],
 };
 
 module.exports = config;
