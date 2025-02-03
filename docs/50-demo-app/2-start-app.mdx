@@ -1,24 +1,40 @@
 import Screenshot from '@site/src/components/Screenshot';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # 👐 Start the Application
 
-Go to the [GitHub repository](https://github.com/mongodb-developer/library-management-system) for the demo application. From there, you have two options to start the application.
+You have two options to start the application.
 
 ## Option 1: Run in a codespace
-
-:::info
-
-🚀 __Express start: [Click here](https://github.com/codespaces/new/mongodb-developer/library-management-system?quickstart=1) to start a new codespace or resume your last one!__
-
-:::
 
 By far, the easiest way to start the application is to run it in a codespace. A codespace is a cloud-hosted, containerized development environment that you can connect to from Visual Studio Code. It comes pre-configured with all the tools you need to build and run the application.
 
 In the case of this application, you can even use the online IDE to edit the code and see the changes reflected in the running application.
 
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
+
+Open the [repository on the `main` branch](https://github.com/mongodb-developer/library-management-system).
+
 To start the application in a codespace, click "Code." Then, look for the *Codespaces* tab. Click "Create Codespace on main." This will create a new codespace for you and start the application.
 
 <Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/1-codespace.png" alt="Create codespace button" />
+
+</TabItem>
+
+<TabItem value="java" label="☕️ Java Spring Boot">
+
+Open the [repository on the `java-server` branch](https://github.com/mongodb-developer/library-management-system/tree/java-server).
+
+To start the Java application in a codespace, check that you are in the `java-server` branch and then click "Code." Then, look for the *Codespaces* tab. Click "Create Codespace on java-server." This will create a new codespace for you and start the application.
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system/tree/java-server" src="img/screenshots/50-demo-app/2-start-app/1-codespace-java.png" alt="Create codespace button" />
+
+</TabItem>
+</Tabs>
+
+
 
 Let it run for a few seconds as it prepares your environment. It will clone the repository, prepare the containers, and run the installation scripts. Once it's ready, you'll see an IDE, with a preview window that shows the running application.
 
@@ -27,6 +43,21 @@ Again, this might take a few minutes. It's a great time to grab a coffee. ☕️
 :::
 
 <Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/2-codespace.png" alt="The codespace" />
+
+:::warning
+Right now, you should see a big error message in the console, as we haven't configured the app yet. Don't worry, you'll get it up and running in a few minutes.
+
+```
+    ####### ######  ######  ####### ######
+    #       #     # #     # #     # #     #
+    #       #     # #     # #     # #     #
+    #####   ######  ######  #     # ######
+    #       #   #   #   #   #     # #   #
+    #       #    #  #    #  #     # #    #
+    ####### #     # #     # ####### #     #
+```
+:::
+
 
 ### Expose the server port
 
@@ -66,6 +97,9 @@ Then, change to the `library-management-system` directory.
 cd library-management-system
 ```
 
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
+
 Now, go to each of the `client` and `server` directories and install the dependencies.
 
 ```bash
@@ -87,5 +121,33 @@ And, in another terminal window, start the client application.
 cd client
 npm start
 ```
+
+</TabItem>
+
+<TabItem value="java" label="☕️ Java Spring Boot">
+
+You need to have a local JDK 17+ and Maven installed.
+
+```bash
+cd client
+npm install
+```
+
+Start the server application.
+
+```bash
+cd java-server
+mvn spring-boot:start
+```
+
+And, in another terminal window, start the client application.
+
+```bash
+cd client
+npm start
+```
+
+</TabItem>
+</Tabs>
 
 You now have the client running on http://localhost:4200 and the server running on http://localhost:5000.
