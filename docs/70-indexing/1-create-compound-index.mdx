@@ -1,16 +1,19 @@
-# 👐 Build a compound index following the ESR rule
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-:::info
-Note for Java users: we will create indexes via a Javascript script! Although there's nothing stopping us to write this code in Java, this is usually a DB Admin task.
-:::
+# 👐 Build a compound index following the ESR rule
 
 In this exercise, you will build a compound index following the ESR rule, compare the query explain plans before and after creating the index, and analyze them.
 
 ## Explore the code
 
+
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
+
 1. Open the file `server/src/indexing/borrowed-books-index.ts` [file](https://github.com/mongodb-developer/library-management-system/blob/main/server/src/indexing/borrowed-books-index.ts) in your GitHub Codespace.
 
-2. Examine the code to build a compound index on the `borrowedBooks` collection.
+2. Examine the code to build a compound index on the `issueDetails` collection.
 
     ```js
     /**
@@ -33,7 +36,7 @@ In this exercise, you will build a compound index following the ESR rule, compar
     ```
 
     :::info
-    The index is created on the `borrowedBooks` collection to support the query that finds the issue details for a user with a specific `userID`, where the `borrowDate` is greater than or equal to a specific `date`, and sorts the results by `returnedDate` in descending order.
+    The index is created on the `issueDetails` collection to support the query that finds the issue details for a user with a specific `userID`, where the `borrowDate` is greater than or equal to a specific `date`, and sorts the results by `returnedDate` in descending order.
 
     This is compound index and it follows the ESR rule: Equality, Sort, and Range. This ensures optimal performance for the query.
     :::
@@ -72,6 +75,54 @@ In this exercise, you will build a compound index following the ESR rule, compar
 
     Notice the difference in the winning plan stage and the number of documents examined before and after creating the index.
     :::
+
+
+</TabItem>
+
+<TabItem value="java" label="☕️ Java Spring Boot">
+
+1. Open the file `java-server/java-server/src/main/java/com/mongodb/devrel/library/model/IssueDetail.java` [file](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/model/IssueDetail.java) in your GitHub Codespace.
+
+1. Examine the code to build a compound index on the `issueDetails` collection.
+
+    ```java
+    // add these imports
+    import org.springframework.data.mongodb.core.index.Indexed;
+    import org.springframework.data.mongodb.core.index.CompoundIndex;
+
+    // ...
+    // Add the CompoundIndex annotation
+    @CompoundIndex(name = "user_returned_borrow_idx", def = "{'user._id': 1, 'returnedDate': 1, 'borrowDate': 1}")
+    public class IssueDetail {
+        // ...
+
+        // Constructors, Getters, Setters
+    }
+    ```
+
+    :::info
+    The index is created on the `issueDetails` collection to support the query that finds the issue details for a user with a specific `userID`, where the `borrowDate` is greater than or equal to a specific `date`, and sorts the results by `returnedDate` in descending order.
+
+    This is compound index and it follows the ESR rule: Equality, Sort, and Range. This ensures optimal performance for the query.
+    :::
+1. Add to `application.properties` this line to enable automatic creation of indexes
+
+    ```
+    spring.data.mongodb.auto-index-creation=true
+    ```
+1. Stop the running app.
+    1. Locate the bottom panel and click on the `TERMINAL` tab.
+    1. Press Ctrl+C to interrup the running app
+
+1. Restart the app typing in the Terminal:
+
+    ```bash
+    mvn spring-boot:start
+    ```
+
+</TabItem>
+</Tabs>
+
 
 ## 🦸‍♀️ Try different indexes
 
