@@ -1,10 +1,9 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 #  👐 Enable Validation for the Users Collection
 
 In this exercise, you will explore the pre-written JSON validation schema for the `users` collection, run a script to apply it to the collection, and test the schema validation by inserting a document that does not match the schema.
-
-:::info
-Note for Java users: schema validation rules are typically applied via a Javascript script! Although there's nothing stopping us to write this code in Java, this is usually a DB Admin task.
-:::
 
 ## Database user permissions
 
@@ -22,7 +21,19 @@ Atlas will deploy the change in a few seconds.
 
 ## Explore the JSON schema
 
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
+
 The JSON schema for the `users` collection is stored in the `server/src/schema-validation/apply-schema.ts` [file](https://github.com/mongodb-developer/library-management-system/blob/main/server/src/schema-validation/apply-schema.ts). Open the file in your GitHub codespace and examine the schema.
+
+</TabItem>
+
+<TabItem value="java" label="☕️ Java Spring Boot">
+
+JSON schema for the `users` collection:
+
+</TabItem>
+</Tabs>
 
 ```ts
 const userSchema = {
@@ -49,6 +60,10 @@ The schema defines the following constraints:
 
 ## Explore the script to apply the schema
 
+
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
+
 Examine the lines immediately following the schema definition in the `apply-schema.ts` file. You will see a function that applies the schema to the `users` collection.
 
 ```js
@@ -73,7 +88,50 @@ The function uses the `db.command()` method to apply the schema to the `users` c
     - If you set it to `error`, MongoDB rejects any insert or update that violates the validation criteria.
     - If you set it to `warn`, the operation proceeds, but the violation is recorded in the MongoDB log.
 
+</TabItem>
+
+<TabItem value="java" label="☕️ Java Spring Boot">
+
+```java
+public void applySchemaValidation() {
+    try (MongoClient mongoClient = MongoClients.create(mongoDBURI)) {
+        MongoDatabase database = mongoClient.getDatabase("library");
+        
+        Document userSchema = new Document("$jsonSchema", new Document()
+            .append("bsonType", "object")
+            .append("required", List.of("name", "isAdmin"))
+            .append("properties", new Document()
+                .append("name", new Document("bsonType", "string").append("minLength", 5)
+                    .append("description", "must be a string and is required"))
+                .append("isAdmin", new Document("bsonType", "bool")
+                    .append("description", "must be a boolean and is required"))
+            )
+        );
+
+        Document command = new Document("collMod", "users")
+            .append("validator", userSchema)
+            .append("validationLevel", "strict")
+            .append("validationAction", "error");
+        
+        Document result = database.runCommand(command);
+        
+        if (result.getDouble("ok") != 1.0) {
+            System.err.println("Failed to enable schema validation!");
+            System.exit(1);
+        } else {
+            System.out.println("Schema validation enabled!");
+        }
+    }
+}
+```
+
+</TabItem>
+</Tabs>
+
 ## Apply the schema to the `users` collection
+
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
 
 You need to run the script to apply the schema to the `users` collection.
 
@@ -102,11 +160,41 @@ You need to run the script to apply the schema to the `users` collection.
     Schema validation enabled!
     ```
 
+</TabItem>
+
+<TabItem value="java" label="☕️ Java Spring Boot">
+
+1. Stop the running app.
+    1. Locate the bottom panel and click on the `TERMINAL` tab.
+    1. Press Ctrl+C to interrup the running app
+
+1. Copy above code for `applySchemaValidation` as a method in the `LibraryApplication.java` class.
+1. Modify the `run` method to call `applySchemaValidation`
+    ```java
+    @Override
+    public void run(String... args) {
+        log.info("🚀 App Started");
+        applySchemaValidation();
+    }
+    ```
+1. Restart the app typing in the Terminal:
+
+    ```bash
+    mvn spring-boot:start
+    ```
+
+</TabItem>
+</Tabs>
+
+
 :::caution
 If you see an error related to your user permissions, go back to the [Database User Permissions](#database-user-permissions) section and update your user permissions.
 :::
 
 ## Test the schema validation
+
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
 
 Now that the schema validation is enabled for the `users` collection, you can test it by inserting a document that does not match the schema.
 
@@ -121,6 +209,26 @@ Now that the schema validation is enabled for the `users` collection, you can te
 The error describes that the `name` and `isAdmin` fields are required but missing in the document you tried to insert.
 
 Modify the script to insert a document again with the `name` and `isAdmin` fields and you should see the document inserted successfully.
+
+
+</TabItem>
+
+<TabItem value="java" label="☕️ Java Spring Boot">
+
+Now that the schema validation is enabled for the `users` collection, you can test it by inserting a document that does not match the schema, or you can check the Validation tab in Compass to check for the new validation rules.
+
+You can also check it in the mongosh typing:
+
+```
+db.getCollectionInfos({ name: "users" })
+```
+
+If schema validation is not enabled, the "validator" field will be missing or empty.
+
+
+</TabItem>
+</Tabs>
+
 
 ## Summary
 
