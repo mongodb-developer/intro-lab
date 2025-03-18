@@ -6,13 +6,12 @@ import TabItem from '@theme/TabItem';
 
 Now that your environment is set up, you can configure the application.
 
-There should already be a file open in the IDE. If not, look in the file explorer on the left, and open the file `.env`. This file contains the configuration for the application.
+There should already be a file open in the IDE. If not, look in the file explorer on the left, and open the file below. This file contains the configuration for the application.
 
 <Tabs groupId="server">
 <TabItem value="node" label="🚀 NodeJS/Express">
 
 File: `server/.env`
-
 
 ```
 PORT=5000
@@ -24,12 +23,11 @@ SECRET="secret"
 
 <TabItem value="java" label="☕️ Java Spring Boot">
 
-File: `/java-server/src/main/resources/.env`
+File: `/java-server/src/main/resources/application.properties`
 
 ```
-DATABASE_NAME=library
-# Add here the MongoDB URI of your database cluster
-DATABASE_URI=
+spring.data.mongodb.uri=mongodb+srv://user:password@serverurl
+spring.data.mongodb.database=library
 ```
 </TabItem>
 </Tabs>
