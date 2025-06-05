@@ -13,16 +13,35 @@ How many calls do you need to do to your database now? Do you still need an aggr
 
 <div>
 
-```ts
-    public async getBook(bookId: string): Promise<Book> {
-        /**
-         * Optimized Code
-         */
-        const book = await collections?.books?.findOne({ _id: bookId });
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-        return book;
-    }
+<Tabs>
+  <TabItem value="js" label="JavaScript">
 
-```
+  ```ts
+      public async getBook(bookId: string): Promise<Book> {
+          /**
+           * Optimized Code
+           */
+          const book = await collections?.books?.findOne({ _id: bookId });
+
+          return book;
+      }
+
+  ```
+
+  </TabItem>
+
+  <TabItem value="java" label="Java">
+
+  ```java
+    // todo
+  ```
+
+  </TabItem>
+
+
+</Tabs>
 </div>
 </details>
