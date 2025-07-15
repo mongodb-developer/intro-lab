@@ -1,3 +1,5 @@
+[![.github/workflows/deploy.yml](https://github.com/mongodb-developer/intro-lab/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/mongodb-developer/intro-lab/actions/workflows/deploy.yml)
+
 # Developer Days Intro Lab
 
 This is the Intro Lab used during Developer Days to set up a MongoDB Atlas Account and get some sample data in.
