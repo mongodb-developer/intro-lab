@@ -105,11 +105,20 @@ In this exercise, you will build a compound index following the ESR rule, compar
 
     This is compound index and it follows the ESR rule: Equality, Sort, and Range. This ensures optimal performance for the query.
     :::
-1. Add to `application.properties` this line to enable automatic creation of indexes
+1. Open the `application.yml` and include the property `auto-index-creation: true`. At the end, your configuration will look like this:
 
+
+    ```yaml
+    spring:
+      data:
+        mongodb:
+          uri: ${MONGODB_URI}
+          database: library
+          auto-index-creation: true
     ```
-    spring.data.mongodb.auto-index-creation=true
-    ```
+       
+
+This ensures that any indexes defined in your domain models (for example with @Indexed) will be created automatically by Spring Data MongoDB at startup.
 1. Stop the running app.
     1. Locate the bottom panel and click on the `TERMINAL` tab.
     1. Press Ctrl+C to interrup the running app
