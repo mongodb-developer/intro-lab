@@ -126,24 +126,30 @@ npm start
 
 <TabItem value="java" label="☕️ Java Spring Boot">
 
-You need to have a local JDK 17+ and Maven installed.
+Before starting the backend, make sure you set the MongoDB connection string as an environment variable.
+
+#### 1 - Set the environment variable
+On Linux / macOS:
 
 ```bash
-cd client
-npm install
+export MONGODB_URI="<YOUR_CONNECTION_STRING>"
+````
+
+On Windows:
 ```
-
-Start the server application.
-
-```bash
-cd java-server
+$env:MONGODB_URI="<YOUR_CONNECTION_STRING>"
+```
+#### 2 - Run the Java server:
+```
+cd library-management-system/java-server
 mvn spring-boot:start
 ```
 
-And, in another terminal window, start the client application.
-
+#### 3 - Run the client:
 ```bash
-cd client
+cd library-management-system/client
+
+npm install
 npm start
 ```
 
