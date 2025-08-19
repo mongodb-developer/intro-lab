@@ -1,3 +1,4 @@
+import Screenshot from "@site/src/components/Screenshot";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -83,21 +84,15 @@ In this exercise, you will build a compound index following the ESR rule, compar
 
 1. Open the file `java-server/java-server/src/main/java/com/mongodb/devrel/library/model/IssueDetail.java` [file](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/model/IssueDetail.java) in your GitHub Codespace.
 
-1. Examine the code to build a compound index on the `issueDetails` collection.
-
-    ```java
-    // add these imports
-    import org.springframework.data.mongodb.core.index.Indexed;
-    import org.springframework.data.mongodb.core.index.CompoundIndex;
-
-    // ...
-    // Add the CompoundIndex annotation
+2. We will use the `@CompoundIndex` annotation to define a compound index on the `issueDetails` collection.  
+   This index combines multiple fields (`user._id`, `returnedDate`, and `borrowDate`) to optimize queries that filter or sort using these fields together:
+    
+    ```java  
+    @Document(collection = "issueDetails")
     @CompoundIndex(name = "user_returned_borrow_idx", def = "{'user._id': 1, 'returnedDate': 1, 'borrowDate': 1}")
-    public class IssueDetail {
-        // ...
-
-        // Constructors, Getters, Setters
-    }
+    public record IssueDetail(
+        // fields ..
+    ){}
     ```
 
     :::info
@@ -105,7 +100,7 @@ In this exercise, you will build a compound index following the ESR rule, compar
 
     This is compound index and it follows the ESR rule: Equality, Sort, and Range. This ensures optimal performance for the query.
     :::
-1. Open the `application.yml` and include the property `auto-index-creation: true`. At the end, your configuration will look like this:
+3. Open the `application.yml` and include the property `auto-index-creation: true`. At the end, your configuration will look like this:
 
 
     ```yaml
@@ -116,9 +111,9 @@ In this exercise, you will build a compound index following the ESR rule, compar
           database: library
           auto-index-creation: true
     ```
-       
 
 This ensures that any indexes defined in your domain models (for example with @Indexed) will be created automatically by Spring Data MongoDB at startup.
+
 1. Stop the running app.
     1. Locate the bottom panel and click on the `TERMINAL` tab.
     1. Press Ctrl+C to interrup the running app
@@ -126,8 +121,18 @@ This ensures that any indexes defined in your domain models (for example with @I
 1. Restart the app typing in the Terminal:
 
     ```bash
-    mvn spring-boot:start
+    mvn spring-boot:run
     ```
+As soon as the application starts, you will see log entries showing the creation of indexes, similar to the image below.
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/70-indexing/index-creation.png" alt="Spring Index creation" />
+
+To double-check, you can either open **MongoDB Compass** and inspect the Indexes tab of the issueDetails collection,
+or run the following command in mongosh:
+
+```
+db.issueDetails.getIndexes()
+```
 
 </TabItem>
 </Tabs>
