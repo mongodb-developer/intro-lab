@@ -82,16 +82,23 @@ In this exercise, you will build a compound index following the ESR rule, compar
 
 <TabItem value="java" label="☕️ Java Spring Boot">
 
-1. Open the file `java-server/java-server/src/main/java/com/mongodb/devrel/library/model/IssueDetail.java` [file](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/model/IssueDetail.java) in your GitHub Codespace.
-
-2. We will use the `@CompoundIndex` annotation to define a compound index on the `issueDetails` collection.  
-   This index combines multiple fields (`user._id`, `returnedDate`, and `borrowDate`) to optimize queries that filter or sort using these fields together:
-    
-    ```java  
+1. Let’s start with our [`java-server/src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java`](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java) record. Right now, it looks like this:
+    ```
     @Document(collection = "issueDetails")
-    @CompoundIndex(name = "user_returned_borrow_idx", def = "{'user._id': 1, 'returnedDate': 1, 'borrowDate': 1}")
     public record IssueDetail(
         // fields ..
+    ) {}
+    ``` 
+
+2. Now let’s optimize queries that need to filter or sort by multiple fields. For example, we often query by user._id, returnedDate, and borrowDate together.
+    To speed this up, we can add a compound index using the **@CompoundIndex** annotation.  
+    ```java  
+    @Document(collection = "issueDetails")
+    @CompoundIndex(
+            name = "user_returned_borrow_idx", 
+            def = "{'user._id': 1, 'returnedDate': 1, 'borrowDate': 1}")
+    public record IssueDetail(
+        // fields
     ){}
     ```
 

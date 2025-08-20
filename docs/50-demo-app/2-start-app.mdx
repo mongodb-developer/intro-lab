@@ -126,9 +126,13 @@ npm start
 
 <TabItem value="java" label="☕️ Java Spring Boot">
 
-Before starting the backend, make sure you set the MongoDB connection string as an environment variable.
+1. Before starting the backend, switch to the java-server project.
+```
+    git checkout java-server
+```
+This command moves you into the correct project folder that contains the Java backend code.
 
-1. Set the environment variable
+2. Set the MongoDB connection string as an environment variable:
    - On Linux / macOS:
    ```bash
     export MONGODB_URI="<YOUR_CONNECTION_STRING>"
@@ -139,18 +143,15 @@ Before starting the backend, make sure you set the MongoDB connection string as 
     $env:MONGODB_URI="<YOUR_CONNECTION_STRING>"
     ```
 
-2. Run the Java server:
+3. Run the Java server:
     ```
-    cd library-management-system/java-server
-    mvn spring-boot:start
+    cd java-server
+    mvn spring-boot:run
     ```
 
-3. Run the client:
-    ```bash
-    cd library-management-system/client
-
-    npm install
-    npm start
+4. Run the client:
+    ```bash    
+    (cd ../client && npm install && npm start)
     ```
 
 </TabItem>
