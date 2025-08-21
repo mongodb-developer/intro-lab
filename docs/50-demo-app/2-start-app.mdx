@@ -58,6 +58,8 @@ Right now, you should see a big error message in the console, as we haven't conf
 ```
 :::
 
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
 
 ### Expose the server port
 
@@ -75,6 +77,24 @@ You'll see the text in the *Visibility* column change to `Public`.
 
 That's it! You're now ready to move to the next section.
 
+</TabItem>
+<TabItem value="java" label="☕️ Java Spring Boot">
+### Set the MongoDB connection
+To run the application in GitHub Codespaces, you now need to set the MongoDB connection string before starting the server.
+In the terminal of your Codespace, run:
+```Java
+export MONGODB_URI="<YOUR_CONNECTION_STRING>"
+```
+After setting the environment variable, start the application again with:
+```Java
+mvn spring-boot:run
+```
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/5-set-environments.png" alt="The Port Visibility menu" />
+Once the command finishes, the application will be up and running on port 5000.
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/6-app-started.png" alt="The Port Visibility menu" />
+
+</TabItem>
+</Tabs>
 ## 🦸 Option 2: Run locally
 
 If you prefer to run the application locally, you can do so by following these steps. Keep in mind that the following steps of this lab will be using the codespace, so you might need to adapt some of the commands.
