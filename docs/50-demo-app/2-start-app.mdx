@@ -21,21 +21,6 @@ To start the application in a codespace, click "Code." Then, look for the *Codes
 
 <Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/1-codespace.png" alt="Create codespace button" />
 
-</TabItem>
-
-<TabItem value="java" label="☕️ Java Spring Boot">
-
-Open the [repository on the `java-server` branch](https://github.com/mongodb-developer/library-management-system/tree/java-server).
-
-To start the Java application in a codespace, check that you are in the `java-server` branch and then click "Code." Then, look for the *Codespaces* tab. Click "Create Codespace on java-server." This will create a new codespace for you and start the application.
-
-<Screenshot url="https://github.com/mongodb-developer/library-management-system/tree/java-server" src="img/screenshots/50-demo-app/2-start-app/1-codespace-java.png" alt="Create codespace button" />
-
-</TabItem>
-</Tabs>
-
-
-
 Let it run for a few seconds as it prepares your environment. It will clone the repository, prepare the containers, and run the installation scripts. Once it's ready, you'll see an IDE, with a preview window that shows the running application.
 
 :::note
@@ -58,8 +43,61 @@ Right now, you should see a big error message in the console, as we haven't conf
 ```
 :::
 
-<Tabs groupId="server">
-<TabItem value="node" label="🚀 NodeJS/Express">
+### Expose the server port
+
+To get the application working in that environment, there is one small change you need to make to the codespace. You need to expose the port where the server is running.
+
+Look for the *Ports* tab at the bottom of the IDE.
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/3-ports.png" alt="The Ports tab" />
+
+Once you click on the tab, you'll see a list of ports. Right-click on the port `Server (5000)` row. Then, select "Port Visibility" and "Public."
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/4-port-visibility.png" alt="The Port Visibility menu" />
+
+You'll see the text in the *Visibility* column change to `Public`.
+
+That's it! You're now ready to move to the next section.
+
+
+</TabItem>
+
+<TabItem value="java" label="☕️ Java Spring Boot">
+
+Open the [repository on the `java-server` branch](https://github.com/mongodb-developer/library-management-system/tree/java-server).
+
+To start the Java application in a codespace, check that you are in the `java-server` branch and then click "Code." Then, look for the *Codespaces* tab. Click "Create Codespace on java-server." This will create a new codespace for you and start the application.
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system/tree/java-server" src="img/screenshots/50-demo-app/2-start-app/1-codespace-java.png" alt="Create codespace button" />
+
+
+Let it run for a few seconds as it prepares your environment. It will clone the repository, prepare the containers, and run the installation scripts. Once it's ready, you'll see an IDE, with a preview window that shows the running application.
+
+:::note
+Again, this might take a few minutes. It's a great time to grab a coffee. ☕️
+:::
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/2-codespace-java.png" alt="The codespace" />
+
+:::warning
+Right now, you should see an error message in the console, as we haven't configured the app yet. Don't worry, you'll get it up and running in a few minutes.
+:::
+
+### Set the MongoDB connection
+To run the application in GitHub Codespaces, you now need to set the MongoDB connection string before starting the server.
+In the terminal of your Codespace, run:
+```Java
+export MONGODB_URI="<YOUR_CONNECTION_STRING>"
+```
+After setting the environment variable, start the application again with:
+```Java
+mvn spring-boot:run
+```
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/5-set-environments.png" alt="Set environment variable" />
+Once the command finishes, the application will be up and running on port 5000.
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/6-app-started.png" alt="App is started on port 5000" />
 
 ### Expose the server port
 
@@ -77,24 +115,10 @@ You'll see the text in the *Visibility* column change to `Public`.
 
 That's it! You're now ready to move to the next section.
 
-</TabItem>
-<TabItem value="java" label="☕️ Java Spring Boot">
-### Set the MongoDB connection
-To run the application in GitHub Codespaces, you now need to set the MongoDB connection string before starting the server.
-In the terminal of your Codespace, run:
-```Java
-export MONGODB_URI="<YOUR_CONNECTION_STRING>"
-```
-After setting the environment variable, start the application again with:
-```Java
-mvn spring-boot:run
-```
-<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/5-set-environments.png" alt="The Port Visibility menu" />
-Once the command finishes, the application will be up and running on port 5000.
-<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/6-app-started.png" alt="The Port Visibility menu" />
 
 </TabItem>
 </Tabs>
+
 ## 🦸 Option 2: Run locally
 
 If you prefer to run the application locally, you can do so by following these steps. Keep in mind that the following steps of this lab will be using the codespace, so you might need to adapt some of the commands.

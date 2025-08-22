@@ -11,7 +11,7 @@ In this exercise, you will build a compound index following the ESR rule, compar
 <Tabs groupId="server">
 <TabItem value="node" label="🚀 NodeJS/Express">
 
-1. Open the file `server/src/indexing/borrowed-books-index.ts` [file](https://github.com/mongodb-developer/library-management-system/blob/main/server/src/indexing/borrowed-books-index.ts) in your GitHub Codespace.
+1. Open the file `server/src/indexing/borrowed-books-index.ts` file in your GitHub Codespace.
 
 2. Examine the code to build a compound index on the `issueDetails` collection.
 
@@ -81,7 +81,7 @@ In this exercise, you will build a compound index following the ESR rule, compar
 
 <TabItem value="java" label="☕️ Java Spring Boot">
 
-1. Let’s start with our [`IssueDetail`](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java) record. Right now, it looks like this:
+1. Let’s start with our `IssueDetail` record. Right now, it looks like this:
     ```java title='src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java'
     @Document(collection = "issueDetails")
     public record IssueDetail(
@@ -140,16 +140,19 @@ To double-check that the index was created, you can run the following command in
 db.issueDetails.getIndexes()
 ```
 
-:::info
-Optional: If you’re using the MongoDB for VS Code extension
-, you can also open the issueDetails collection in the VS Code sidebar and inspect the Indexes tab directly.
-:::
-
-<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/70-indexing/2-index-vscode.png" alt="VS Code Playground" />
-
 </TabItem>
 </Tabs>
 
+## Verify that the index is created
+
+1. Open the **VS Code extension** from the sidebar on the left.
+1. Click **Add Connection**.
+1. In the welcome screen, click **Connect** under the **Connect with Connection String** section.
+1. Enter the MongoDB connection string from your Atlas cluster, making sure to replace the **password placeholder**.
+1. Press **Enter**.
+1. In the sidebar, you should now see your database. Expand the **library** database, then the **issueDetails** collection, and finally select **Indexes**.
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/70-indexing/2-index-vscode.png" alt="VS Code Extension showing the collection indexes" />
 
 ## 🦸‍♀️ Try different indexes
 
