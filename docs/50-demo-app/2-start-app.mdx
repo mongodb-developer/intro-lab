@@ -58,6 +58,8 @@ Right now, you should see a big error message in the console, as we haven't conf
 ```
 :::
 
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
 
 ### Expose the server port
 
@@ -75,6 +77,24 @@ You'll see the text in the *Visibility* column change to `Public`.
 
 That's it! You're now ready to move to the next section.
 
+</TabItem>
+<TabItem value="java" label="☕️ Java Spring Boot">
+### Set the MongoDB connection
+To run the application in GitHub Codespaces, you now need to set the MongoDB connection string before starting the server.
+In the terminal of your Codespace, run:
+```Java
+export MONGODB_URI="<YOUR_CONNECTION_STRING>"
+```
+After setting the environment variable, start the application again with:
+```Java
+mvn spring-boot:run
+```
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/5-set-environments.png" alt="The Port Visibility menu" />
+Once the command finishes, the application will be up and running on port 5000.
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/6-app-started.png" alt="The Port Visibility menu" />
+
+</TabItem>
+</Tabs>
 ## 🦸 Option 2: Run locally
 
 If you prefer to run the application locally, you can do so by following these steps. Keep in mind that the following steps of this lab will be using the codespace, so you might need to adapt some of the commands.
@@ -126,26 +146,33 @@ npm start
 
 <TabItem value="java" label="☕️ Java Spring Boot">
 
-You need to have a local JDK 17+ and Maven installed.
-
-```bash
-cd client
-npm install
+1. Before starting the backend, switch to the java-server project.
 ```
-
-Start the server application.
-
-```bash
-cd java-server
-mvn spring-boot:start
+    git checkout java-server
 ```
+This command moves you into the correct project folder that contains the Java backend code.
 
-And, in another terminal window, start the client application.
+2. Set the MongoDB connection string as an environment variable:
+   - On Linux / macOS:
+   ```bash
+    export MONGODB_URI="<YOUR_CONNECTION_STRING>"
+    ````
 
-```bash
-cd client
-npm start
-```
+    - On Windows:
+    ```
+    $env:MONGODB_URI="<YOUR_CONNECTION_STRING>"
+    ```
+
+3. Run the Java server:
+    ```
+    cd java-server
+    mvn spring-boot:run
+    ```
+
+4. Run the client:
+    ```bash    
+    (cd ../client && npm install && npm start)
+    ```
 
 </TabItem>
 </Tabs>

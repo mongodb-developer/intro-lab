@@ -1,4 +1,10 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # 📘 Patterns Used
+
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
 
 Let's look at the current code that is used to retrieve a single book. You can find this code in the `server/src/controllers/books.ts` file.
 
@@ -64,6 +70,57 @@ The second stage uses a `$lookup` stage to join the `issueDetails` collection to
 The third and fourth stages compute the number of available books by subtracting the number of issued books from the total inventory.
 
 At this point, we also have to do additional queries to display the first five reviews for a book and the author information. This means that we have to do three queries to display a single book.
+
+</TabItem>
+
+<TabItem value="java" label="☕️ Java Spring Boot">
+Let's look at the current code that is used to retrieve a single book.
+Open the [`BookService`](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/domain/service/BookService.java) class and check the `getBook` method:
+
+```java title='src/main/java/com/mongodb/devrel/library/domain/service/BookService.java'
+ public Optional<Book> getBook(String id) {
+        Aggregation aggregation = Aggregation.newAggregation(
+                Aggregation.match(Criteria.where("_id").is(id)),
+                LookupOperation.newLookup()
+                        .from("issueDetails")
+                        .localField("_id")
+                        .foreignField("book._id")
+                        .pipeline(
+                                Aggregation.match(new Criteria().orOperator(
+                                        Criteria.where("recordType").is("reservation"),
+                                        Criteria.where("recordType").is("borrowedBook").and("returned").is(false)
+                                ))
+                        )
+                        .as("details"),
+                Aggregation.addFields()
+                        .addFieldWithValue("available",
+                                new Document("$subtract", Arrays.asList("$totalInventory", new Document("$size", "$details"))))
+                        .build(),
+                Aggregation.project().andExclude("details")
+        );
+
+        AggregationResults<Book> results = mongoTemplate.aggregate(aggregation, "books", Book.class);
+
+        return results.getMappedResults().stream().findFirst();
+    }
+
+```
+
+The method does the following:
+
+1. **Aggregation.match**: filters the book by `_id` (just like a `SQL WHERE`).
+
+2. **LookupOperation.newLookup()**: performs a join with the issueDetails collection to get related records.
+    - Here we filter only reservations or borrowed books that haven’t been returned yet.
+    - This stage is expensive because it has to scan the issueDetails collection.
+
+3. **Aggregation.addFields()**: computes the available field by subtracting issued books from the total inventory.
+4. **Aggregation.project()**: removes the temporary details field before returning the final result.
+
+This approach works, but it’s not efficient — it simulates a relational-style query in MongoDB.
+We will later see how to apply patterns to improve this.
+</TabItem>
+</Tabs>
 
 Let's look at patterns that we can apply here to improve the performance of this query.
 

@@ -1,28 +1,61 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # 👐 Optimize the Query
 
-Now that you know of the patterns that we used in our data schema, you can rewrite the `getBook` method to retrieve the book information.
+
+Now let’s adjust the `getBook` method to take advantage of the patterns we just discussed.
+
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
 
 Open the `server/src/controllers/books.ts` file, and look for the `getBook` method. How could you rewrite this query to be blazing fast, and meet the requirements that we defined for this application?
-
 :::tip
 How many calls do you need to do to your database now? Do you still need an aggregation pipeline? Look in the [documentation](https://www.mongodb.com/docs/manual/reference/method/db.collection.findOne/) for the `findOne` method.
 :::
+<details>
+  <summary>Click here to see the answer</summary>
+
+<div>
+```ts
+    public async getBook(bookId: string): Promise<Book> {
+        /**
+          * Optimized Code
+          */
+        const book = await collections?.books?.findOne({ _id: bookId });
+
+        return book;
+    }
+```
+
+</div>
+</details>
+
+</TabItem>
+
+<TabItem value="java" label="☕️ Java Spring Boot">
+1. Open the `BookService` class
+
+2. locate the `getBook` method.
+
+How could you simplify this code to make it blazing fast, using the patterns we just discussed?
 
 <details>
   <summary>Click here to see the answer</summary>
 
 <div>
-
-```ts
-    public async getBook(bookId: string): Promise<Book> {
-        /**
-         * Optimized Code
-         */
-        const book = await collections?.books?.findOne({ _id: bookId });
-
-        return book;
-    }
-
+```java title='src/main/java/com/mongodb/devrel/library/domain/service/BookService.java'
+  public Optional<Book> getBook(String id) {
+    return bookRepository.findById(id);
+  }
 ```
 </div>
 </details>
+
+</TabItem>
+
+
+
+</Tabs>
+
+
