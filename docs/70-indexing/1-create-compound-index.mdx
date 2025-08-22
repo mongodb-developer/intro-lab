@@ -43,13 +43,13 @@ In this exercise, you will build a compound index following the ESR rule, compar
 
 3. Execute the script to create the compound index.
 
-    ```bash
+    ```
     npx tsx src/indexing/borrowed-books-index.ts
     ```
 
     After a few seconds, you should see the following output:
 
-    ```bash
+    ```
     Connecting to MongoDB Atlas...
     Connected!
 
@@ -82,7 +82,7 @@ In this exercise, you will build a compound index following the ESR rule, compar
 <TabItem value="java" label="☕️ Java Spring Boot">
 
 1. Let’s start with our `IssueDetail` record. Right now, it looks like this:
-    ```java title='src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java'
+    ```kotlin title='src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java'
     @Document(collection = "issueDetails")
     public record IssueDetail(
         // fields ..
@@ -92,7 +92,7 @@ In this exercise, you will build a compound index following the ESR rule, compar
 2. Now let’s optimize queries that need to filter or sort by multiple fields.
     For example, we often query by `user._id`, `returnedDate`, and `borrowDate` together.
     To speed this up, we can add a compound index using the **@CompoundIndex** annotation.  
-   ```java title='src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java' 
+   ```kotlin title='src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java' 
     @Document(collection = "issueDetails")
     @CompoundIndex(
             name = "user_returned_borrow_idx", 
@@ -127,7 +127,7 @@ This ensures that any indexes defined in your domain models (for example, with `
 
 1. Restart the app typing in the Terminal:
 
-    ```bash
+    ```
     mvn spring-boot:run
     ```
 As soon as the application starts, you will see log entries showing the creation of indexes, similar to the image below.

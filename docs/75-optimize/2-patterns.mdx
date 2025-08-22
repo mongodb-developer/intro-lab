@@ -77,7 +77,7 @@ At this point, we also have to do additional queries to display the first five r
 Let's look at the current code that is used to retrieve a single book.
 Open the [`BookService`](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/domain/service/BookService.java) class and check the `getBook` method:
 
-```java title='src/main/java/com/mongodb/devrel/library/domain/service/BookService.java'
+```kotlin title='src/main/java/com/mongodb/devrel/library/domain/service/BookService.java'
  public Optional<Book> getBook(String id) {
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.match(Criteria.where("_id").is(id)),

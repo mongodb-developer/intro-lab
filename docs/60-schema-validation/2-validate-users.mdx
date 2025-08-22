@@ -93,7 +93,7 @@ The function uses the `db.command()` method to apply the schema to the `users` c
 <TabItem value="java" label="☕️ Java Spring Boot">
 In this step, we’ll review the code that applies schema validation to the users collection.
 It’s already implemented in `SchemaValidationConfig.java` no changes needed. We’ll look at two methods:
-```java title='src/main/java/com/mongodb/devrel/library/infrastructure/config/SchemaValidationConfig.java'
+```kotlin title='src/main/java/com/mongodb/devrel/library/infrastructure/config/SchemaValidationConfig.java'
 @Configuration
 public class SchemaValidationConfig {
 
@@ -139,17 +139,16 @@ You need to run the script to apply the schema to the `users` collection.
 
 1. Run the following command to apply the schema to the `users` collection:
 
-    ```sh
+    ```
     cd server
     npx tsx src/schema-validation/apply-schema.ts
-
     ```
 
     You might be prompted to allow pasting into the terminal. Click "Allow" to paste the command.
 
     Click "Enter" to run the command. After a few seconds, you should see the following output:
 
-    ```sh
+    ```
     Connecting to MongoDB Atlas...
     Connected!
 
@@ -166,7 +165,7 @@ To apply the schema, you must set this property to **apply**.
 
 Stop the application if it’s running and restart it with:
 
-```java
+```kotlin
 mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Dlab.schema-mode=apply"
 ```
 
@@ -193,7 +192,7 @@ Now that the schema validation is enabled for the `users` collection, you can te
 2. Explore the call to the `insertOne()` function around line 12 that will try to insert a new user and the error handling code around line 18.
 3. Execute the script by running the following command.
 
-  ```sh
+  ```
   npx tsx src/schema-validation/test-validation.ts
   ```
 
@@ -210,7 +209,7 @@ The [validateUserSchema](https://github.com/mongodb-developer/library-management
 
 To trigger it, stop the application if it’s running and start it again with the property set to **test**:
 
-```java
+```kotlin
 mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Dlab.schema-mode=test"
 ```
 

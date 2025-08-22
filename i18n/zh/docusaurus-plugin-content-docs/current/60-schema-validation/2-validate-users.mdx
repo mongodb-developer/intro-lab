@@ -80,7 +80,7 @@ const resultUsers = await db.command({
 
 1. 运行以下命令将模式应用于 `users` 集合：
 
-    ```sh
+    ```
     cd server
     node dist/schema-validation/apply-schema.js 
     ```
@@ -89,7 +89,7 @@ const resultUsers = await db.command({
 
     按回车键运行命令。几秒钟后，您应该会看到以下输出：
 
-    ```sh
+    ```
     Connecting to MongoDB Atlas...
     Connected!
 
@@ -112,7 +112,7 @@ const resultUsers = await db.command({
 
 您应该会看到一条错误消息。在错误消息的最底部，您应该会看到以下内容：
 
-```sh
+```
 "schemaRulesNotSatisfied": [{
     "operatorName": "required",
     "specifiedAs": {"required": ["name","isAdmin"]},

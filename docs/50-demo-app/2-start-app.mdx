@@ -86,11 +86,11 @@ Right now, you should see an error message in the console, as we haven't configu
 ### Set the MongoDB connection
 To run the application in GitHub Codespaces, you now need to set the MongoDB connection string before starting the server.
 In the terminal of your Codespace, run:
-```Java
+```
 export MONGODB_URI="<YOUR_CONNECTION_STRING>"
 ```
 After setting the environment variable, start the application again with:
-```Java
+```
 mvn spring-boot:run
 ```
 
@@ -131,13 +131,13 @@ During the lab, we will use GitHub Codespaces. These instructions are here just 
 
 First, clone the repository to your local machine.
 
-```bash
+```
 git clone git@github.com:mongodb-developer/library-management-system.git
 ```
 
 Then, change to the `library-management-system` directory.
 
-```bash
+```
 cd library-management-system
 ```
 
@@ -146,7 +146,7 @@ cd library-management-system
 
 Now, go to each of the `client` and `server` directories and install the dependencies.
 
-```bash
+```
 cd client
 npm install
 cd ../server
@@ -155,13 +155,13 @@ npm install
 
 Start the server application.
 
-```bash
+```
 npm start
 ```
 
 And, in another terminal window, start the client application.
 
-```bash
+```
 cd client
 npm start
 ```
@@ -178,7 +178,7 @@ This command moves you into the correct project folder that contains the Java ba
 
 2. Set the MongoDB connection string as an environment variable:
    - On Linux / macOS:
-   ```bash
+   ```
     export MONGODB_URI="<YOUR_CONNECTION_STRING>"
     ````
 
@@ -194,7 +194,7 @@ This command moves you into the correct project folder that contains the Java ba
     ```
 
 4. Run the client:
-    ```bash    
+    ```    
     (cd ../client && npm install && npm start)
     ```
 
