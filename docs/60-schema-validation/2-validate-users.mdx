@@ -91,37 +91,35 @@ The function uses the `db.command()` method to apply the schema to the `users` c
 </TabItem>
 
 <TabItem value="java" label="☕️ Java Spring Boot">
-Open the file `SchemaValidationConfig.java`.
-
-Inside this class, there are already two methods implemented:
-
-- `applySchema` → applies the schema validation rules to the users collection.
-- `testSchema` → tests the validation by trying to insert invalid data.
-
-
+In this step, we’ll review the code that applies schema validation to the users collection.
+It’s already implemented in `SchemaValidationConfig.java` no changes needed. We’ll look at two methods:
 ```java title='infrastructure/config/SchemaValidationConfig'
 @Configuration
 public class SchemaValidationConfig {
 
-   private static final Logger log = LoggerFactory.getLogger(SchemaValidationConfig.class);
-   private static final String COLLECTION_NAME = "users";
+    // fields ..
 
-   enum SchemaMode { APPLY, TEST }
+    private void applyUserSchema(MongoDatabase db)  {
+       // implementation
+    }
 
-   private void applySchema(MongoDatabase db) {
-       // code
-   }
-
-   private void testSchema(MongoDatabase db) {
-       // code
-   }
-
-    // Others methods ..
+    private void runCollMod(MongoDatabase db, String collection, Document schema) {
+       // implementation
+    }
 
 }
 ```
+- `applyUserSchema(MongoDatabase db)`
+  - Ensures the users collection exists.
+  - Builds a $jsonSchema requiring name (string, minLength: 5) and isAdmin (boolean).
+  - Calls runCollMod(...) to attach the validator to the collection.
 
-For readability, only the class structure is shown below. 
+- `runCollMod(MongoDatabase db, String collection, Document schema)`
+  - Executes collMod with validator, validationLevel=strict, and validationAction=error.
+
+
+
+For readability, only the class structure is shown above. 
 You can open the [SchemaValidationConfig](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/infrastructure/config/SchemaValidationConfig.java) in your project to review the complete implementation.
 
 </TabItem>
@@ -163,8 +161,10 @@ You need to run the script to apply the schema to the `users` collection.
 
 <TabItem value="java" label="☕️ Java Spring Boot">
 
-The [applySchema](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/infrastructure/config/SchemaValidationConfig.java#L46) method is already implemented. 
-Spring will execute it automatically thanks to [`@ConditionalOnProperty`](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/infrastructure/config/SchemaValidationConfig.java#L28), as long as we set the property value to **apply**. Stop the application if it’s running and start it again with:
+The `applyUserSchema` method is triggered by the [execute](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/infrastructure/config/SchemaValidationConfig.java#L44) method, which runs only if the property `lab.schema-mode` is set.
+To apply the schema, you must set this property to **apply**.
+
+Stop the application if it’s running and restart it with:
 
 ```java
 mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Dlab.schema-mode=apply"
@@ -205,12 +205,10 @@ Modify the script to insert a document again with the `name` and `isAdmin` field
 </TabItem>
 
 <TabItem value="java" label="☕️ Java Spring Boot">
+In this step, the schema is already created, and it’s time to test it.
+The [validateUserSchema](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/infrastructure/config/SchemaValidationConfig.java#L97) method, already implemented, tries to insert a new user without the isAdmin field.
 
-The [testSchema](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/infrastructure/config/SchemaValidationConfig.java#L82) 
-method is also already implemented. 
-
-It attempts to insert a document that does not respect the schema (missing the required isAdmin field). This causes the operation to fail, proving that the schema validation is active.
-To test this behavior, stop the application and run the again in validation mode by setting the property value to **test**:
+To trigger it, stop the application if it’s running and start it again with the property set to **test**:
 
 ```java
 mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Dlab.schema-mode=test"
