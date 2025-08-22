@@ -1,8 +1,14 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # 🦸‍♀️ Enable Validation for the Authors Collection
 
 In this exercise, you will define a JSON schema for the authors collection, apply the schema to the collection, and test the schema validation by inserting a document that does not match the schema.
 
 This is an advanced exercise that requires you to write code. If you get stuck and you're doing this during a live workshop, you can flag down an instructor in the room for help.
+
+<Tabs groupId="server">
+<TabItem value="node" label="🚀 NodeJS/Express">
 
 1. Start by opening the `server/src/schema-validation/apply-schema.ts` file in your GitHub codespace and uncomment lines 41-61.
 1. Complete the tasks marked with `// TODO` comments.
@@ -13,3 +19,35 @@ This is an advanced exercise that requires you to write code. If you get stuck a
 
     ```
 1. Finally, test the schema validation by modifying the `server/src/schema-validation/test-validation.ts` script. Inserting a document in the `authors` collection.
+</TabItem>
+
+<TabItem value="java" label="☕️ Java Spring Boot">
+In this advanced exercise, you will extend the [SchemaValidationConfig](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/infrastructure/config/SchemaValidationConfig.java) class to support the authors collection.
+Two methods are already defined in the class, but both are left with `// TODO` markers for you to implement:
+```java title='../infrastructure/config/SchemaValidationConfig'
+private void applyAuthorSchema(MongoDatabase db) {
+    // TODO: Implement the schema for authors ($jsonSchema with required 'name', 'bio', etc.)
+}
+
+private void validateAuthorsSchema(MongoDatabase db) {
+    // TODO: Insert an invalid document to assert rejection (e.g., missing or short 'name')
+}
+```
+
+Once implemented, you can run the application with the right target and mode:
+
+- Apply the schema to authors
+```java
+mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Dlab.schema-mode=apply -Dlab.schema-target=authors"
+```
+- Test the schema validation for authors
+```java
+mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Dlab.schema-mode=test -Dlab.schema-target=authors"
+```
+
+When you run in apply mode, you should see logs confirming the schema was applied.
+When you run in test mode, the invalid insert should fail, proving the validation works.
+</TabItem>
+
+
+</Tabs>
