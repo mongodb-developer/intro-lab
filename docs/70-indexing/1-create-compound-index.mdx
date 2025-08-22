@@ -8,7 +8,6 @@ In this exercise, you will build a compound index following the ESR rule, compar
 
 ## Explore the code
 
-
 <Tabs groupId="server">
 <TabItem value="node" label="🚀 NodeJS/Express">
 
@@ -82,17 +81,18 @@ In this exercise, you will build a compound index following the ESR rule, compar
 
 <TabItem value="java" label="☕️ Java Spring Boot">
 
-1. Let’s start with our [`java-server/src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java`](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java) record. Right now, it looks like this:
-    ```
+1. Let’s start with our [`IssueDetail`](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java) record. Right now, it looks like this:
+    ```java title='src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java'
     @Document(collection = "issueDetails")
     public record IssueDetail(
         // fields ..
     ) {}
     ``` 
 
-2. Now let’s optimize queries that need to filter or sort by multiple fields. For example, we often query by user._id, returnedDate, and borrowDate together.
+2. Now let’s optimize queries that need to filter or sort by multiple fields.
+    For example, we often query by `user._id`, `returnedDate`, and `borrowDate` together.
     To speed this up, we can add a compound index using the **@CompoundIndex** annotation.  
-    ```java  
+   ```java title='src/main/java/com/mongodb/devrel/library/domain/model/IssueDetail.java' 
     @Document(collection = "issueDetails")
     @CompoundIndex(
             name = "user_returned_borrow_idx", 
@@ -110,7 +110,7 @@ In this exercise, you will build a compound index following the ESR rule, compar
 3. Open the `application.yml` and include the property `auto-index-creation: true`. At the end, your configuration will look like this:
 
 
-    ```yaml
+    ```yaml title='src/main/resources/application.yml'
     spring:
       data:
         mongodb:
@@ -119,11 +119,11 @@ In this exercise, you will build a compound index following the ESR rule, compar
           auto-index-creation: true
     ```
 
-This ensures that any indexes defined in your domain models (for example with @Indexed) will be created automatically by Spring Data MongoDB at startup.
+This ensures that any indexes defined in your domain models (for example, with `@Indexed`) will be created automatically by Spring Data MongoDB at startup.
 
 1. Stop the running app.
     1. Locate the bottom panel and click on the `TERMINAL` tab.
-    1. Press Ctrl+C to interrup the running app
+    1. Press Ctrl+C/Cmd+c to interrupt the running app
 
 1. Restart the app typing in the Terminal:
 
@@ -132,14 +132,20 @@ This ensures that any indexes defined in your domain models (for example with @I
     ```
 As soon as the application starts, you will see log entries showing the creation of indexes, similar to the image below.
 
-<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/70-indexing/index-creation.png" alt="Spring Index creation" />
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/70-indexing/1-index-creation.png" alt="Spring Index creation" />
 
-To double-check, you can either open **MongoDB Compass** and inspect the Indexes tab of the issueDetails collection,
-or run the following command in mongosh:
+To double-check that the index was created, you can run the following command in mongosh:
 
 ```
 db.issueDetails.getIndexes()
 ```
+
+:::info
+Optional: If you’re using the MongoDB for VS Code extension
+, you can also open the issueDetails collection in the VS Code sidebar and inspect the Indexes tab directly.
+:::
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/70-indexing/2-index-vscode.png" alt="VS Code Playground" />
 
 </TabItem>
 </Tabs>

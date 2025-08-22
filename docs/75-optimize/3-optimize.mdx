@@ -34,13 +34,17 @@ How many calls do you need to do to your database now? Do you still need an aggr
 </TabItem>
 
 <TabItem value="java" label="☕️ Java Spring Boot">
-Open the BookService class, and look for the getBook method. How could you simplify this code to make it blazing fast, using the patterns we just discussed?
+1. Open the `BookService` class
+
+2. locate the `getBook` method.
+
+How could you simplify this code to make it blazing fast, using the patterns we just discussed?
 
 <details>
   <summary>Click here to see the answer</summary>
 
 <div>
-```java
+```java title='src/main/java/com/mongodb/devrel/library/domain/service/BookService.java'
   public Optional<Book> getBook(String id) {
     return bookRepository.findById(id);
   }

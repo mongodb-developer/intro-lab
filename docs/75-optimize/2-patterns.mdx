@@ -77,7 +77,7 @@ At this point, we also have to do additional queries to display the first five r
 Let's look at the current code that is used to retrieve a single book.
 Open the [`BookService`](https://github.com/mongodb-developer/library-management-system/blob/java-server/java-server/src/main/java/com/mongodb/devrel/library/domain/service/BookService.java) class and check the `getBook` method:
 
-```java
+```java title='src/main/java/com/mongodb/devrel/library/domain/service/BookService.java'
  public Optional<Book> getBook(String id) {
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.match(Criteria.where("_id").is(id)),
@@ -106,9 +106,9 @@ Open the [`BookService`](https://github.com/mongodb-developer/library-management
 
 ```
 
-This method is doing the same steps as the Node.js code:
+The method does the following:
 
-1. **Aggregation.match**: filters the book by _id (just like a SQL WHERE).
+1. **Aggregation.match**: filters the book by `_id` (just like a `SQL WHERE`).
 
 2. **LookupOperation.newLookup()**: performs a join with the issueDetails collection to get related records.
     - Here we filter only reservations or borrowed books that haven’t been returned yet.
@@ -117,7 +117,7 @@ This method is doing the same steps as the Node.js code:
 3. **Aggregation.addFields()**: computes the available field by subtracting issued books from the total inventory.
 4. **Aggregation.project()**: removes the temporary details field before returning the final result.
 
-Just like in Node.js, this approach works but it’s not efficient — it simulates a relational-style query in MongoDB.
+This approach works, but it’s not efficient — it simulates a relational-style query in MongoDB.
 We will later see how to apply patterns to improve this.
 </TabItem>
 </Tabs>
