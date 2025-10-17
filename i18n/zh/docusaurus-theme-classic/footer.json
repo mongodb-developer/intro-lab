@@ -1,26 +1,22 @@
 {
   "link.item.label.Try MongoDB Atlas": {
     "message": "试用 MongoDB Atlas",
-    "description": "The label of footer link with label=Try MongoDB Atlas linking to https://www.mongodb.com/try?utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=search-party-lab&utm_term=joel.lord"
+    "description": "The label of footer link with label=Try MongoDB Atlas linking to https://www.mongodb.com/try?utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=search-party-lab&utm_term=project.phoenix"
   },
   "link.item.label.Forums": {
     "message": "论坛",
-    "description": "The label of footer link with label=Forums linking to https://www.mongodb.com/community/forums/utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=search-party-lab&utm_term=joel.lord"
+    "description": "The label of footer link with label=Forums linking to https://www.mongodb.com/community/forums?utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=search-party-lab&utm_term=project.phoenix"
   },
-  "link.item.label.Developer Center": {
-    "message": "开发者中心",
-    "description": "The label of footer link with label=Developer Center linking to https://www.mongodb.com/developer/utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=search-party-lab&utm_term=joel.lord"
-  },
-  "link.item.label.MongoDB University": {
-    "message": "MongoDB 大学",
-    "description": "The label of footer link with label=MongoDB University linking to https://learn.mongodb.com/utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=search-party-lab&utm_term=joel.lord"
+  "link.item.label.Skill Badges": {
+    "message": "Skill Badges",
+    "description": "The label of footer link with label=Skill Badges linking to https://learn.mongodb.com/skills?team=devrel&utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=developer.day&utm_term=project.phoenix"
   },
   "link.item.label.This lab in GitHub": {
     "message": "GitHub 上的更多实验",
-    "description": "The label of footer link with label=This lab in GitHub linking to https://github.com/mongodb-developer/search-lab"
+    "description": "The label of footer link with label=This lab in GitHub linking to https://github.com/mongodb-developer/intro-lab"
   },
-  "link.item.label.© 2024 MongoDB, Inc.": {
-    "message": "© 2024 MongoDB, Inc.",
-    "description": "The label of footer link with label=© 2024 MongoDB, Inc. linking to #"
+  "link.item.label.© 2025 MongoDB, Inc.": {
+    "message": "© 2025 MongoDB, Inc.",
+    "description": "The label of footer link with label=© 2025 MongoDB, Inc. linking to #"
   }
 }
