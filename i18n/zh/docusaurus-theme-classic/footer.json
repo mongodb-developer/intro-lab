@@ -1,15 +1,15 @@
 {
   "link.item.label.Try MongoDB Atlas": {
     "message": "试用 MongoDB Atlas",
-    "description": "The label of footer link with label=Try MongoDB Atlas linking to https://www.mongodb.com/try?utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=search-party-lab&utm_term=project.phoenix"
+    "description": "The label of footer link with label=Try MongoDB Atlas linking to https://www.mongodb.com/try"
   },
   "link.item.label.Forums": {
     "message": "论坛",
-    "description": "The label of footer link with label=Forums linking to https://www.mongodb.com/community/forums?utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=search-party-lab&utm_term=project.phoenix"
+    "description": "The label of footer link with label=Forums linking to https://www.mongodb.com/community/forums"
   },
   "link.item.label.Skill Badges": {
     "message": "Skill Badges",
-    "description": "The label of footer link with label=Skill Badges linking to https://learn.mongodb.com/skills?team=devrel&utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=developer.day&utm_term=project.phoenix"
+    "description": "The label of footer link with label=Skill Badges linking to https://learn.mongodb.com/skills?team=devrel"
   },
   "link.item.label.This lab in GitHub": {
     "message": "GitHub 上的更多实验",
