@@ -52,14 +52,12 @@ const footerLinks = [{
     href: `https://www.mongodb.com/try?${utmParams}`
 }, {
     label: "Forums",
-    href: `https://www.mongodb.com/community/forums/${utmParams}`
+    href: `https://www.mongodb.com/community/forums?${utmParams}`
 }, {
-    label: "Developer Center",
-    href: `https://www.mongodb.com/developer/${utmParams}`
-}, {
-    label: "MongoDB University",
-    href: `https://learn.mongodb.com/${utmParams}`
-}, {
+    label: "Skill Badges",
+    href: `https://learn.mongodb.com/skills?team=devrel&${utmParams}`
+},
+{
     href: `https://github.com/${organizationName}/${workshopName}`,
     label: "This lab in GitHub"
 }, {
