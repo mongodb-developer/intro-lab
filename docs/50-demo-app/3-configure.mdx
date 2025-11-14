@@ -7,34 +7,31 @@ import TabItem from '@theme/TabItem';
 <Tabs groupId="server">
 <TabItem value="node" label="🚀 NodeJS/Express">
 
-Now that your environment is set up, you can configure the application.
+Now that your environment is set up, you can explore it.
+
+### Local MongoDB instance
+
 There should already be a file open in the IDE. If not, look in the file explorer on the left, and open the file below. This file contains the configuration for the application.
 
 File: `server/.env`
 
 ```
-PORT=5000
-DATABASE_URI="mongodb+srv://user:password@serverurl"
-DATABASE_NAME="library"
-SECRET="secret"
+PORT=5400
+DATABASE_URI=mongodb://localhost:27017
+DATABASE_NAME=library
+SECRET=secret
 ```
 
+The `DATABASE_URI` parameter is already set to `mongodb://localhost:27017`, which connects to a local MongoDB Atlas deployment running inside the Codespace sandbox.
 
-You'll need to change the `DATABASE_URI` parameter to match your connection string. That's the same one you used to import the data.
-
-:::tip
-Don't remember how to get your connection string? Check out the [Import Data](/docs/importing-data/import-data) section.
-:::
-
-Copy and paste your connection string into the `DATABASE_URI` parameter. 
-
-The file will automatically save, and the server will restart.
+To explore the database and the imported dataset, click the leaf icon in the left sidebar to open the MongoDB extension. You’ll see a preset connection called **"Library DB"**. Expand it and browse the collections in the **library** database.
 
 
-
-In the *Terminal* tab at the bottom, look for the `Server is running on port: 5000` line. If you see it, you're good to go!
+In the *Terminal* tab at the bottom, look for the line `Server is running on port: 5400`. If it appears, the Node.js API for the library application is up and ready to serve requests.
 
 <Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/3-configure/1-running.png" alt="The terminal panel" />
+
+You’ve already seen the client-side website for the library, running in the preview tab. Feel free to click around and explore the different pages.
 
 </TabItem>
 
