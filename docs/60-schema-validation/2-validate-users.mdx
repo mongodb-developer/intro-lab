@@ -6,26 +6,12 @@ import TabItem from '@theme/TabItem';
 
 In this exercise, you will explore the pre-written JSON validation schema for the `users` collection, run a script to apply it to the collection, and test the schema validation by inserting a document that does not match the schema.
 
-## Database user permissions
-
-To update the validator for any database collection, your database user must have admin privileges. Follow these steps to ensure your user has the correct permissions:
-
-1. Open the [Atlas UI](https://cloud.mongodb.com?utm_campaign=devrel&utm_source=workshop&utm_medium=cta&utm_content=developer.day&utm_term=project.phoenix).
-2. In the left-hand menu, navigate to **Network Settings** and select "Database Access."
-3. Locate your database user in the list. Check the **MongoDB Roles** column for the role of the user you are using for this workshop. If the role is not **atlasAdmin@admin**, you will need to update it.
-4. If the role is not **atlasAdmin@admin**, click "Edit" button next to the user.
-5. Scroll down to the **Database User Privileges** section and expand the **Built-in Role** dropdown.
-6. Select "Atlas admin" from the dropdown menu.
-7. Click "Update User" to save the changes.
-
-Atlas will deploy the change in a few seconds.
-
 ## Explore the JSON schema
 
 <Tabs groupId="server">
 <TabItem value="node" label="🚀 NodeJS/Express">
 
-The JSON schema for the `users` collection is stored in the `server/src/schema-validation/apply-schema.ts` [file](https://github.com/mongodb-developer/library-management-system/blob/main/server/src/schema-validation/apply-schema.ts). Open the file in your GitHub codespace and examine the schema.
+The JSON schema for the `users` collection is stored in the `server/src/schema-validation/apply-schema.ts` [file](https://github.com/mongodb-developer/library-management-system/blob/main/server/src/schema-validation/apply-schema.ts). Open the file and examine the schema.
 
 </TabItem>
 
