@@ -6,11 +6,25 @@ import TabItem from '@theme/TabItem';
 
 You have two options to start the application.
 
-## Option 1: Run in a codespace
+## Option 1: Run in Instruqt
 
-By far, the easiest way to start the application is to run it in a codespace. A codespace is a cloud-hosted, containerized development environment that you can connect to from Visual Studio Code. It comes pre-configured with all the tools you need to build and run the application.
+Instruqt is a lab platform that provides cloud-based sandboxes which come pre-configured with all the tools you need to run this lab.
 
-In the case of this application, you can even use the online IDE to edit the code and see the changes reflected in the running application.
+Navigate to the Instruqt lab using [this link](https://mdb.link/instruqt-library).
+
+Fill out the form that appears and click **Submit and access**.
+
+Click **Start** to launch the lab environment.
+
+You should see a screen with a purple progress bar indicating that Instruqt is preparing a sandbox with all the required libraries for this lab and a MongoDB database.
+
+Once this is done, you should see a **Start** button at the bottom right of the screen. Click this to enter the lab.
+
+## Option 2: Run in a codespace
+
+If Instruqt is not working for you, you can also use GitHub Codespaces. A GitHub Codespace is a cloud-hosted, containerized development environment that you can connect to from Visual Studio Code. It comes pre-configured with all the tools you need to build and run the application.
+
+Similar to Instruqt, you can even use Codespaces as an online IDE to edit the code and see the changes reflected in the running application.
 
 <Tabs groupId="server">
 <TabItem value="node" label="🚀 NodeJS/Express">
@@ -21,44 +35,17 @@ To start the application in a codespace, click "Code." Then, look for the *Codes
 
 <Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/1-codespace.png" alt="Create codespace button" />
 
-Let it run for a few seconds as it prepares your environment. It will clone the repository, prepare the containers, and run the installation scripts. Once it's ready, you'll see an IDE, with a preview window that shows the running application.
+Let it run for a few minutes as it prepares your environment. It will clone the repository, prepare the containers, and run the installation scripts. Once it's ready, you'll see an IDE, with a preview window that shows the running application.
 
 :::note
 Again, this might take a few minutes. It's a great time to grab a coffee. ☕️
 :::
 
-<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/2-codespace.png" alt="The codespace" />
+Once the command finishes, the application will be running on port 5400.
 
-:::warning
-Right now, you should see a big error message in the console, as we haven't configured the app yet. Don't worry, you'll get it up and running in a few minutes.
+In the *Terminal* tab at the bottom, look for the line `Server is running on port: 5400`. If it appears, the Node.js API for the library application is up and ready to serve requests.
 
-```
-    ####### ######  ######  ####### ######
-    #       #     # #     # #     # #     #
-    #       #     # #     # #     # #     #
-    #####   ######  ######  #     # ######
-    #       #   #   #   #   #     # #   #
-    #       #    #  #    #  #     # #    #
-    ####### #     # #     # ####### #     #
-```
-:::
-
-### Expose the server port
-
-To get the application working in that environment, there is one small change you need to make to the codespace. You need to expose the port where the server is running.
-
-Look for the *Ports* tab at the bottom of the IDE.
-
-<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/3-ports.png" alt="The Ports tab" />
-
-Once you click on the tab, you'll see a list of ports. Right-click on the port `Server (5000)` row. Then, select "Port Visibility" and "Public."
-
-<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/4-port-visibility.png" alt="The Port Visibility menu" />
-
-You'll see the text in the *Visibility* column change to `Public`.
-
-That's it! You're now ready to move to the next section.
-
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/3-configure/1-running.png" alt="The terminal panel" />
 
 </TabItem>
 
@@ -77,55 +64,41 @@ Let it run for a few seconds as it prepares your environment. It will clone the 
 Again, this might take a few minutes. It's a great time to grab a coffee. ☕️
 :::
 
-<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/2-codespace-java.png" alt="The codespace" />
-
-:::warning
-Right now, you should see an error message in the console, as we haven't configured the app yet. Don't worry, you'll get it up and running in a few minutes.
-:::
-
-### Set the MongoDB connection
-To run the application in GitHub Codespaces, you now need to set the MongoDB connection string before starting the server.
-In the terminal of your Codespace, run:
-```
-export MONGODB_URI="<YOUR_CONNECTION_STRING>"
-```
-After setting the environment variable, start the application again with:
-```
-mvn spring-boot:run
-```
-
-<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/5-set-environments.png" alt="Set environment variable" />
-Once the command finishes, the application will be up and running on port 5000.
+Once the command finishes, the application will be up and running on port 5400.
 
 <Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/6-app-started.png" alt="App is started on port 5000" />
-
-### Expose the server port
-
-To get the application working in that environment, there is one small change you need to make to the codespace. You need to expose the port where the server is running.
-
-Look for the *Ports* tab at the bottom of the IDE.
-
-<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/3-ports.png" alt="The Ports tab" />
-
-Once you click on the tab, you'll see a list of ports. Right-click on the port `Server (5000)` row. Then, select "Port Visibility" and "Public."
-
-<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/4-port-visibility.png" alt="The Port Visibility menu" />
-
-You'll see the text in the *Visibility* column change to `Public`.
-
-That's it! You're now ready to move to the next section.
-
 
 </TabItem>
 </Tabs>
 
-## 🦸 Option 2: Run locally
+### Access the library website
 
-If you prefer to run the application locally, you can do so by following these steps. Keep in mind that the following steps of this lab will be using the codespace, so you might need to adapt some of the commands.
+Once the environment loads, you may see the following warning:
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/2-start-app/7-visit-page.png" alt="A warning in the codespace saying 'You are about to access a development port served by someone's codespace'" />
+
+You're seeing this warning because the development server is running on a publicly forwarded port, and GitHub shows a security notice anytime someone accesses a public port. Even in your own codespace, GitHub displays it just to confirm you intended to open that external-facing URL.
+
+Click "Continue" to load the library application website. 
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/3-configure/2-reload.png" alt="The refresh icon" />
+
+You should see the application with some books listed now.
+
+### Open the client in a new window
+
+If you accidentally close the Client or want to open it in a separate tab/window go to the Ports tab, hover over Client and a world icon should appear. Click it and the client will open in a new tab.
+
+<Screenshot url="https://github.com/mongodb-developer/library-management-system" src="img/screenshots/50-demo-app/3-configure/open-client.png" alt="Click to open the client app" />
+
+
+## 🦸 Option 3: Run locally
+
+If you prefer to run the application locally, you can do so by following these steps. Keep in mind that the following steps of this lab will be using Instruqt or the GitHub codespace, so you might need to adapt some of the commands.
 
 :::info
 
-During the lab, we will use GitHub Codespaces. These instructions are here just in case you can't use Codespaces or you _really, really, really_ want a local installation.
+During the lab, we will use Instruqt or GitHub Codespaces. These instructions are here just in case you can't use Codespaces or you _really, really, really_ want a local installation.
 
 :::
 
@@ -171,10 +144,10 @@ npm start
 <TabItem value="java" label="☕️ Java Spring Boot">
 
 1. Before starting the backend, switch to the java-server project.
-```
+    ```
     git checkout java-server
-```
-This command moves you into the correct project folder that contains the Java backend code.
+    ```
+    This command moves you into the correct project folder that contains the Java backend code.
 
 2. Set the MongoDB connection string as an environment variable:
    - On Linux / macOS:
